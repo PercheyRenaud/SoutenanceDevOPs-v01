@@ -90,17 +90,17 @@
       #    update_cache: yes
 
   #creare mediawiki Mysql database
-        - name: create mediawiki mysql DATAbase
-          mysql_db:
-              name: WIKI_DB
-              state: present
+      - name: create mediawiki mysql DATAbase
+        mysql_db:
+          name: WIKI_DB
+          state: present
 
-        - name: create mediawiki mysql
-          mysql_user:
-            name: WIKI_DB_USER
-            host: localhost
-            password: WIKI_DB_PASSWD
-            priv: WIKI_DB.*:ALL
+      - name: create mediawiki mysql
+        mysql_user:
+          name: WIKI_DB_USER
+          host: localhost
+          password: WIKI_DB_PASSWD
+          priv: WIKI_DB.*:ALL
 
 
 #   - name: Create MySQL config
