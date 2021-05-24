@@ -1,7 +1,7 @@
 ---
 
-
-      - name: Installation Wordpress
-        become: true
-        hosts: wordpress
-        tasks:
+   - name: Create a ext4 filesystem on /dev/sdb1 and check disk blocks
+   community.general.filesystem:
+      fstype: ext4
+      dev: /dev/sda5
+      opts: -c
