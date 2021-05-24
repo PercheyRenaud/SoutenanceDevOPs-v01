@@ -1,0 +1,18 @@
+---
+
+- name: Installation Wordpress
+  become: true
+  hosts: wordpress
+  tasks:
+
+#unzip
+      - name: install unzip package
+        package:
+          name: unzip
+          state: present
+
+#livraison package
+      - name: Creates directory
+        file:
+          path: /appli/mediawiki/LIVR/28-05
+          state: directory
