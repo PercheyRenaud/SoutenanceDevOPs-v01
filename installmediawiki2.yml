@@ -27,7 +27,7 @@
         unarchive:
           src: /tmp/INPUT.zip
           dest: /appli/mediawiki/LIVR/28-05
-          remote_src: no
+          remote_src: yes
           #creates: /appli/mediawiki/LIVR/28-05
 
 #deversement des livrables
