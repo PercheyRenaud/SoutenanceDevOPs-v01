@@ -59,15 +59,18 @@
 
       - name: install apache2 and php7.3 et modules comp
         apt:
-          name:
+          name: {{ item }}
+          update_cache: yes
+          state: present
+          with items:
             - apache2
             - php
             - php-mysql
             - libapache2-mod-php
             - php-xml
             - php-mbstring
-          state: present
-          update_cache: yes
+          #state: present
+          #update_cache: yes
 
       - name: install python
         apt:
