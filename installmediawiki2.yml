@@ -45,9 +45,8 @@
           creates: /appli/projects/MWC/mediawiki/wikidevops
 
 #renomage
-      - name: renomage
-        stat: path=/appli/projects/MWC/mediawiki/wikidevops
-        register: /MWC_01.00.00_install
+      - name: Move foo to bar
+        command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC_01.00.00_install
 #
 #         - name: install apache and php7.3
 #           apt:
