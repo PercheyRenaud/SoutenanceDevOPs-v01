@@ -1,13 +1,58 @@
 ---
-
-- name: Installation Wordpress
+- hosts: vmcible
   become: true
-  hosts: wordpress
+  vars:
+    - data_disk: /dev/sdb
+    - log_disk: /dev/sdc
   tasks:
+    - name: Create a xfs filesystem on {{ log_disk }} to store system logs
+      filesystem:
+        fstype: xfs
+        dev: "{{ log_disk }}"
 
-#filesystem
-      - name: Create a ext4 filesystem on /dev/sdb1 and check disk blocks
-        community.general.filesystem:
-          fstype: ext4
-          dev: /dev/sda5
-          opts: -c
+    - name: mount {{ log_disk }} on /var/log
+      mount:
+        src: "{{ log_disk }}"
+        path: /var/log
+        state: mounted
+        fstype: xfs
+
+    - name: install xfs tools
+      apt:
+        name: xfsprogs
+        state: present
+
+    - name: Create a xfs filesystem on {{ data_disk }} to store MySQL data
+      filesystem:
+        fstype: xfs
+        dev: "{{ data_disk }}"
+
+    - name: Create directory /var/lib/mysql
+      file:
+        path: /var/lib/mysql
+        state: directory
+
+    - name: mount {{ data_disk }} on /var/lib/mysql
+      mount:
+        src: "{{ data_disk }}"
+        path: /var/lib/mysql
+        state: mounted
+        fstype: xfs
+
+    - name: change permissions on /var/lib/mysql
+      file:
+        path: /var/lib/mysql
+        state: directory
+        owner: mysql
+        group: mysql
+
+    - name: install MariaDB
+      apt:
+        name: mariadb-server
+        state: present
+
+    - name: start MariaDB on boot
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
