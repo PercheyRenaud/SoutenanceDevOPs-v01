@@ -67,7 +67,7 @@
             - php-xml
             - php-mbstring
             #- PyMySQL
-            - python
+            - python3
             - MySQL-python
             - PyMySQL
           state: present
