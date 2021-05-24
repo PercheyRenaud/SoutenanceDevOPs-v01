@@ -66,8 +66,10 @@
             - libapache2-mod-php
             - php-xml
             - php-mbstring
-            #- PyMySQL 
+            #- PyMySQL
             - python
+            - MySQL-python
+            - PyMySQL
           state: present
           update_cache: yes
 
