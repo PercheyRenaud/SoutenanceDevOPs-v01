@@ -37,7 +37,7 @@
           state: directory
 
 #-tar de mediawiki
-      - name: Extract mediawiki.tar.gz > MWC-01.00.00_install
+      - name: Extract mwikidevop.tar.gz >wikidevops
         unarchive:
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki
@@ -47,6 +47,7 @@
 #renomage
       - name: renomage
         command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC01.00.00install
+        creates: /appli/projects/MWC/mediawiki/MWC01.00.00install
 #
 
 #apt update_cache
