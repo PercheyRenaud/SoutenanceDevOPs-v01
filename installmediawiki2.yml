@@ -27,7 +27,7 @@
         unarchive:
           src: /tmp/INPUT.zip
           dest: /appli/mediawiki/LIVR/28-05
-          remote_src: yes
+          remote_src: no
           creates: /appli/mediawiki/LIVR/28-05
 
 #deversement des livrables
@@ -41,7 +41,7 @@
         unarchive:
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki
-          remote_src: yes
+          remote_src: no
           creates: /appli/projects/MWC/mediawiki
 
 
