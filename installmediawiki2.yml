@@ -73,8 +73,8 @@
         apt:
           name:
             - python3
-            - MySQL-python
-            - PyMySQL
+            #- MySQL-python
+#            - PyMySQL
           state: present
           update_cache: yes
 
