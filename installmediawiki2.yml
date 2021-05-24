@@ -17,14 +17,14 @@
           path: /appli/mediawiki/LIVR/28-05
           state: directory
 
-          #livraison package
-      - name: Creates directory LIVR
-        file:
-          path: /tmp/testautorisation
-          state: directory
+      #     #livraison package
+      # - name: Creates directory test
+      #   file:
+      #     path: /tmp/testautorisation
+      #     state: directory
 
       - name: Unzip input.zip
         unarchive:
           src: /tmp/INPUT.zip
           dest: /appli/mediawiki/LIVR/28-05
-          remote_src: no
+          remote_src: yes
