@@ -42,9 +42,12 @@
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki
           remote_src: yes
-          #creates: /appli/projects/MWC/mediawiki
+          creates: /appli/projects/MWC/mediawiki
 
-
+#renomage
+      - name: renomage
+        stat: path=/appli/projects/MWC/mediawiki/wikidevops
+        register: MWC_01.00.00_install
 #
 #         - name: install apache and php7.3
 #           apt:
