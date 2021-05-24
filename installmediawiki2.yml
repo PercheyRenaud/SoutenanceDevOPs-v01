@@ -40,10 +40,9 @@
       - name: Extract mediawiki.tar.gz > MWC-01.00.00_install
         unarchive:
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
-          dest: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/
-          #dest: /appli/projects/MWC/mediawiki/
+          dest: /appli/projects/MWC/mediawiki
           remote_src: yes
-          creates: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/
+          creates: /appli/projects/MWC/mediawiki
 
 
 #
