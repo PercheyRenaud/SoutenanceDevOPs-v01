@@ -46,7 +46,7 @@
 
 #renomage
       - name: Move foo to bar
-        command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC_01.00.00_install
+        command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC01.00.00install
 #
 #         - name: install apache and php7.3
 #           apt:
