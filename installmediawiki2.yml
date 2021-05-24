@@ -28,6 +28,7 @@
           src: /tmp/INPUT.zip
           dest: /appli/mediawiki/LIVR/28-05
           remote_src: yes
+          creates: /appli/mediawiki/LIVR/28-05
 
 #deversement des livrables
       - name: Creates directory projects/MWC/mediawiki
@@ -41,3 +42,4 @@
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki/MWC_01.00.00_install
           remote_src: yes
+          creates: /appli/projects/MWC/mediawiki/MWC_01.00.00_install
