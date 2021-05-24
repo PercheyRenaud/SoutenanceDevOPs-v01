@@ -20,5 +20,5 @@
       - name: Unzip input.zip
         unarchive:
           src: /tmp/INPUT.zip
-          dest: /appli /mediawiki/LIVR/28-05
+          dest: /appli/mediawiki/LIVR/28-05
           remote_src: no
