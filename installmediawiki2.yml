@@ -37,9 +37,45 @@
           state: directory
 
 #-tar de mediawiki
-      - name: Extract mediawiki.tar.gz
+      - name: Extract mediawiki.tar.gz > MWC-01.00.00_install
         unarchive:
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki/MWC_01.00.00_install
           remote_src: yes
           creates: /appli/projects/MWC/mediawiki/
+
+
+#
+#         - name: install apache and php7.3
+#           apt:
+#             name:
+#         - apache2
+#         - php
+#         - php-mysql
+#       state: present
+#       update_cache: yes
+#
+#
+#
+# # DATABASE SERVER
+#
+# - hosts: db
+#   become: true
+#   vars_files: vars/main.yml
+#   vars:
+#     root_password: "......"
+#
+#   tasks:
+#   - name: install mysql
+#     apt:
+#       name:
+#         - mysql-server
+#              state: present
+#       update_cache: yes
+#
+#   - name: Create MySQL config
+#     copy:
+#       dest: "/root/.my.cnf"
+#       content: |
+#                user=root
+#         password={{ root_password }}
