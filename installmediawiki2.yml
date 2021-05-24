@@ -17,10 +17,8 @@
           path: /appli/mediawiki/LIVR/28-05
           state: directory
 
-        - name: Unzip input.zip
-          unarchive:
-            src: /tmp/INPUT.zip
-            dest: /appli /mediawiki/LIVR/28-05
-            remote_src: no
-
-        
+      - name: Unzip input.zip
+        unarchive:
+          src: /tmp/INPUT.zip
+          dest: /appli /mediawiki/LIVR/28-05
+          remote_src: no
