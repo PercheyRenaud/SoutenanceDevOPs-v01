@@ -66,6 +66,7 @@
             - libapache2-mod-php
             - php-xml
             - php-mbstring
+            - mysql-python
           state: present
           update_cache: yes
 
