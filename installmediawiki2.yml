@@ -69,16 +69,16 @@
           state: present
           update_cache: yes
 
-        - name: install MariaDB
-          apt:
-            name: mariadb-server
-            state: present
+      - name: install MariaDB
+        apt:
+          name: mariadb-server
+          state: present
 
-        - name: start MariaDB on boot
-          systemd:
-            name: mariadb
-            state: started
-            enabled: yes
+      - name: start MariaDB on boot
+        systemd:
+          name: mariadb
+          state: started
+          enabled: yes
 
 # DATABASE SERVER
 
