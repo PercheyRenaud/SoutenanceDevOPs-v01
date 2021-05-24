@@ -43,7 +43,7 @@
           dest: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/MWC_01.00.00_install
           #dest: /appli/projects/MWC/mediawiki/
           remote_src: yes
-          #creates: /appli/projects/MWC/mediawiki/
+          creates: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/MWC_01.00.00_install
 
 
 #
