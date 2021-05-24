@@ -37,6 +37,7 @@
 
 #-tar de mediawiki
       - name: Extract mediawiki.tar.gz
-        ansible.builtin.unarchive:
+        unarchive:
           src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
           dest: /appli/projects/MWC/mediawiki/MWC_01.00.00_install
+          remote_src: yes
