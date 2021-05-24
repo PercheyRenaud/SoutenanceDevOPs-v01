@@ -57,33 +57,52 @@
 
 
 
-      - name: install apache and php7.3
+      - name: install apache2 and php7.3
         apt:
           name:
             - apache2
             - php
             - php-mysql
+            - libapache2-mod-php
+            - php-xml
+            - php-mbstring
           state: present
           update_cache: yes
 
+        - name: install MariaDB
+          apt:
+            name: mariadb-server
+            state: present
 
-#
-# # DATABASE SERVER
-#
-# - hosts: db
-#   become: true
-#   vars_files: vars/main.yml
-#   vars:
-#     root_password: "......"
-#
-#   tasks:
-#   - name: install mysql
-#     apt:
-#       name:
-#         - mysql-server
-#              state: present
-#       update_cache: yes
-#
+        - name: start MariaDB on boot
+          systemd:
+            name: mariadb
+            state: started
+            enabled: yes
+
+# DATABASE SERVER
+
+      # - name: install mysql
+      #   apt:
+      #     name:
+      #       - mysql-server
+      #    state: present
+      #    update_cache: yes
+
+  #creare mediawiki Mysql database
+      - name: create ediawiki mysql DATAbase
+        mysql_db:
+            name: WIKI_DB
+            state: present
+
+        - name: create mediawiki mysql
+          mysql_user:
+            name: WIKI_DB_USER
+            host: localhost
+            password: WIKI_DB_PASSWD
+            priv: WIKI_DB.*:ALL
+
+
 #   - name: Create MySQL config
 #     copy:
 #       dest: "/root/.my.cnf"
