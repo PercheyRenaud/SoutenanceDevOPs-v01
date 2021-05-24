@@ -60,26 +60,26 @@
       - name: install apache2 and php7.3 et modules comp
         package:
           name: "{{ item }}"
-            update_cache: yes
-            state: present
-          Loop:
-            - apache2
-            - php
-            - php-mysql
-            - libapache2-mod-php
-            - php-xml
-            - php-mbstring
+          update_cache: yes
+          state: present
+        Loop:
+          - apache2
+          - php
+          - php-mysql
+          - libapache2-mod-php
+          - php-xml
+          - php-mbstring
           #state: present
           #update_cache: yes
 
       - name: install python
         package:
           name: "{{ item }}"
-            update_cahce: yes
-            state: present
-          Loop:
-            - python3
-            - python3-mysqldb
+          update_cahce: yes
+          state: present
+        Loop:
+          - python3
+          - python3-mysqldb
 
 
       - name: install MariaDB
