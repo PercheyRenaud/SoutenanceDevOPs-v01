@@ -90,10 +90,10 @@
       #    update_cache: yes
 
   #creare mediawiki Mysql database
-      - name: create ediawiki mysql DATAbase
-        mysql_db:
-            name: WIKI_DB
-            state: present
+        - name: create mediawiki mysql DATAbase
+          mysql_db:
+              name: WIKI_DB
+              state: present
 
         - name: create mediawiki mysql
           mysql_user:
