@@ -50,22 +50,23 @@
       #   creates: /appli/projects/MWC/mediawiki/MWC01.00.00install
 #
 
-#apt update_cache
-      - name: apt update
+# #apt update_cache
+#       - name: apt update
+#         apt:
+#           update_cache: yes
+
+
+
+      - name: install apache and php7.3
         apt:
-          update_cache: yes
+          name:
+            - apache2
+            - php
+            - php-mysql
+      state: present
+      update_cache: yes
 
 
-#         - name: install apache and php7.3
-#           apt:
-#             name:
-#         - apache2
-#         - php
-#         - php-mysql
-#       state: present
-#       update_cache: yes
-#
-#
 #
 # # DATABASE SERVER
 #
