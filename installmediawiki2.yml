@@ -57,7 +57,7 @@
 
 
 
-      - name: install apache2 and php7.3
+      - name: install apache2 and php7.3 et modules comp
         apt:
           name:
             - apache2
@@ -66,12 +66,17 @@
             - libapache2-mod-php
             - php-xml
             - php-mbstring
-            #- PyMySQL
-            - python3
-            - MySQL-python
-            - PyMySQL
           state: present
           update_cache: yes
+
+        - name: install python
+          apt:
+            name:
+              - python3
+              - MySQL-python
+              - PyMySQL
+            state: present
+            update_cache: yes
 
       - name: install MariaDB
         apt:
