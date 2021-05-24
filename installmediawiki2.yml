@@ -58,11 +58,11 @@
 
 
       - name: install apache2 and php7.3 et modules comp
-        apt:
-          name: {{ item }}
-          update_cache: yes
-          state: present
-          with items:
+        package:
+          name: "{{ item }}"
+            update_cache: yes
+            state: present
+          Loop:
             - apache2
             - php
             - php-mysql
@@ -73,13 +73,14 @@
           #update_cache: yes
 
       - name: install python
-        apt:
-          name:
+        package:
+          name: "{{ item }}"
+            update_cahce: yes
+            state: present
+          Loop:
             - python3
-            #- MySQL-python
-#            - PyMySQL
-          state: present
-          update_cache: yes
+            - python3-mysqldb
+
 
       - name: install MariaDB
         apt:
