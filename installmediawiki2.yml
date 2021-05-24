@@ -45,15 +45,15 @@
           creates: /appli/projects/MWC/mediawiki/wikidevops
 
 #renomage
-      - name: Move foo to bar
+      - name: renomage
         command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC01.00.00install
 #
 
 #apt update_cache
-      - name: atp update
+      - name: apt update
         apt:
-          name: update_cache
-          state: present
+          update_cache: yes
+
 
 #         - name: install apache and php7.3
 #           apt:
