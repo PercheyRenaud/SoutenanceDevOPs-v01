@@ -1,6 +1,6 @@
 ---
 
-- name: Installation Wordpress
+- name: Installation Mediawiki
   become: true
   hosts: wordpress
   tasks:
