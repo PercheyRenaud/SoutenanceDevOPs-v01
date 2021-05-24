@@ -69,14 +69,14 @@
           state: present
           update_cache: yes
 
-        - name: install python
-          apt:
-            name:
-              - python3
-              - MySQL-python
-              - PyMySQL
-            state: present
-            update_cache: yes
+      - name: install python
+        apt:
+          name:
+            - python3
+            - MySQL-python
+            - PyMySQL
+          state: present
+          update_cache: yes
 
       - name: install MariaDB
         apt:
