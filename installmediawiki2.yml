@@ -34,7 +34,7 @@
           state: directory
 
 #-tar de mediawiki
-      - name: Extract mwikidevop.tar.gz >wikidevops
+      - name: Extract wikidevop.tar.gz > wikidevops
         unarchive:
           src: "{{ livr_dir }}/INPUT/PACKAGE/wikidevops.tar.gz"
           dest: "{{ project_dir }}"
@@ -61,7 +61,6 @@
             - python3-mysqldb
           state: present
           update_cache: yes
-
 
       - name: install apache2
         package:
@@ -93,7 +92,7 @@
           name: WIKI_DB
           state: present
 
-      - name: create mediawiki mysql
+      - name: create mediawiki mysql User
         mysql_user:
           name: WIKI_DB_USER
           host: localhost
@@ -117,16 +116,16 @@
 
       - name: run script install.php
         shell: "{{ project_dir }}/MWC_01.00.00_install/maintenance/install.php"
-        args:
-            --dbuser="WIKI_DB_USER"
-            --dbpass="WIKI_DB_PASSWD"
-            --dbname="WIKI_DB"
-            --dbserver=localhost
-            --dbtype=mysql
-            --scriptpath="/mediawiki/MWC_01.00.00_install"
-            --confpath="{{ project_dir }}/MWC_01.00.00_install"
-            --server="http://192.168.56.110"
-            --lang=fr
-            --pass=azerty123!!
-            superwiki
-            admin
+        # args:
+        #     --dbuser="WIKI_DB_USER"
+        #     --dbpass="WIKI_DB_PASSWD"
+        #     --dbname="WIKI_DB"
+        #     --dbserver=localhost
+        #     --dbtype=mysql
+        #     --scriptpath="/mediawiki/MWC_01.00.00_install"
+        #     --confpath="{{ project_dir }}/MWC_01.00.00_install"
+        #     --server="http://192.168.56.110"
+        #     --lang=fr
+        #     --pass=azerty123!!
+        #     superwiki
+        #     admin
