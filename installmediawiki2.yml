@@ -34,7 +34,7 @@
           state: directory
 
 #idemptotence check
-      - name: checking for pre-existing pacakge
+      - name: checking for pre-existing package
         command: ls "{{ project_dir }}/MWC_01.00.00_install"
         register: skip_unpack
         ignore_errors: true
@@ -118,7 +118,7 @@
 #                user=root
 #         password={{ root_password }}
 
-#idemptotence check
+#idemptotence check localSetting.php
       - name: checking for pre-existing LocalSettings
         command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
         register: skip_install
@@ -133,14 +133,50 @@
 
 ###Config apache2
 
-      # - name: config apache2
-      #   ansible.builtin.lineinfile:
-      #       path: /etc/apache2/apache2.conf
-      #       regexp: /var/www/html
-      #       line: {{ project_dir }}
 
       - name: config apache2 - 000-default.conf
         ansible.builtin.lineinfile:
             path: /etc/apache2/sites-available/000-default.conf
             regexp: DocumentRoot
             line: " DocumentRoot {{ project_dir }}"
+
+
+  ###recupération des donnees.xml
+
+# ###"idemptotence check donnnes.xml"
+#       - name: checking for pre-existing donnees.xml
+#         command: cat "{{ project_dir }}/MWC_01.00.00_install/    "
+#         register: skip_donnees
+#         ignore_errors: true
+#         changed_when: false
+
+      - name: Import donnnees.xml
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
+        when: skip_donnees.rc > 0
+
+      - name : rebuildrecentchanges.php
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+
+
+##########"recupération image"
+
+#idemptotence check image
+      - name: checking for pre-existing package_image
+        command: ls "{{ project_dir }}/MWC_01.00.00_install/images/DevOps.png"
+        register: skip_unpack_image
+        ignore_errors: true
+        changed_when: false
+
+      - name: Extract dumpImage.tar.gz > DevOps.png
+        unarchive:
+          src: "{{ livr_dir }}/INPUT/PACKAGE/dumpImage.tar.gz"
+          dest: "{{ project_dir }}/MWC_01.00.00_install/images"
+          mode: 0755
+          owner: wmcuser
+          remote_src: yes
+          creates: "{{ project_dir }}/MWC_01.00.00_install/images"
+        when: skip_unpack_image.rc > 0
+
+      # - name: renaming
+      #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+      #   when: skip_unpack.rc > 0
