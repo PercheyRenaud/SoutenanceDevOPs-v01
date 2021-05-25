@@ -133,13 +133,11 @@
 
 ###Config apache2
 
-
       - name: setting apache root dir to {{ project_dir }}
-        lineinfile:
+        ansible.builtin.lineinfile:
           path: /etc/apache2/sites-available/000-default.conf
           regexp: DocumentRoot
           line: " DocumentRoot {{ project_dir }}"
-
 
       - name: checking apache2.conf
         command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
@@ -159,7 +157,7 @@
             </Directory>
         when: skip_a2conf.rc > 0
 
-
+####000.default
       - name: config apache2 - 000-default.conf
         ansible.builtin.lineinfile:
             path: /etc/apache2/sites-available/000-default.conf
