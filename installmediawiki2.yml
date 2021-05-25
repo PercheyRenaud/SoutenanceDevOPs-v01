@@ -2,7 +2,7 @@
 
 - name: Installation Mediawiki
   become: true
-  hosts: wordpress
+  hosts: vmcible
   vars:
     - livr_dir: /appli/mediawiki/LIVR/28-05
     - project_dir: /appli/projects/MWC/mediawiki
