@@ -75,14 +75,6 @@
           state: present
           update_cache: yes
 
-      # - name: install python
-      #   package:
-      #     name:
-      #       - python2
-      #       #- python2-mysqldb
-      #     update_cache: yes
-      #     state: present
-
       - name: install MariaDB
         apt:
           name: mariadb-server
@@ -119,3 +111,8 @@
 #       content: |
 #                user=root
 #         password={{ root_password }}
+
+###### PHP.install
+
+      - name: Run a script with arguments (free form)
+        ansible.builtin.script: /appli/projects/MWC/mediawiki/MWC01.00.00install/maintenance/install.php --dbuser=WIKI_DB_User --dbpass=WIKI_DB_PSSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_1.35.2_install --confpath=appli/projects/MWC/mediawiki/MWC_1.35.2_install  --server="http://192.168.56.110" --lang=fr --pass=azerty123!! superwiki admin
