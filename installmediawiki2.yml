@@ -3,6 +3,9 @@
 - name: Installation Mediawiki
   become: true
   hosts: wordpress
+  vars:
+    - livr_dir: /appli/mediawiki/LIVR/28-05
+    - project_dir: /appli/projects/MWC/mediawiki
   tasks:
 
 #unzip
@@ -14,7 +17,7 @@
 #livraison package
       - name: Creates directory LIVR
         file:
-          path: /appli/mediawiki/LIVR/28-05
+          path: "{{ livr_dir }}"
           state: directory
 
       #     #livraison package
@@ -26,28 +29,28 @@
       - name: Unzip input.zip
         unarchive:
           src: /tmp/INPUT.zip
-          dest: /appli/mediawiki/LIVR/28-05
+          dest: "{{ livr_dir }}"
           remote_src: yes
-          creates: /appli/mediawiki/LIVR/28-05/INPUT
+          creates: "{{ livr_dir }}"/INPUT
 
 #deversement des livrables
       - name: Creates directory projects/MWC/mediawiki
         file:
-          path: /appli/projects/MWC/mediawiki
+          path: "{{ project_dir }}"
           state: directory
 
 #-tar de mediawiki
       - name: Extract mwikidevop.tar.gz >wikidevops
         unarchive:
-          src: /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/wikidevops.tar.gz
-          dest: /appli/projects/MWC/mediawiki
+          src: "{{ livr_dir }}"/INPUT/PACKAGE/wikidevops.tar.gz
+          dest: "{{ project_dir }}"
           remote_src: yes
-          creates: /appli/projects/MWC/mediawiki/wikidevops
+          creates: "{{ project_dir }}"/wikidevops
 
-# #renomage
-#       - name: renomage
-#         command: mv /appli/projects/MWC/mediawiki/wikidevops "/appli/projects/MWC/mediawiki/MWC_01.00.00_install"
-#         #creates: /appli/projects/MWC/mediawiki/
+#renomage
+      - name: renaming
+        command: mv "{{ project_dir }}"/wikidevops "{{ project_dir }}""/MWC_01.00.00_install"
+        creates: "{{ project_dir }}"
 
 # #apt update_cache
 #       - name: apt update
@@ -114,24 +117,5 @@
 
 ###### PHP.install
 
-      # - name: Run a script with arguments (free form)
-      #   script:
-      #     cmd: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_User --dbpass=WIKI_DB_PSSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_1.35.2_install --confpath=appli/projects/MWC/mediawiki/MWC_1.35.2_install  --server="http://192.168.56.110" --lang=fr --pass=azerty123!! superwiki admin
-      #     remote_src: yes
-
-      - name: run script
-        shell: 'appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php'
-        args:
-          ('{{var_name}}')
-            --dbuser=WIKI_DB_USER
-            --dbpass=WIKI_DB_PSSWD
-            --dbname=WIKI_DB
-            --dbserver=localhost
-            --dbtype=mysql
-            --scriptpath=/mediawiki/MWC_01.00.00_install
-            --confpath=appli/projects/MWC/mediawiki/MWC_01.00.00_install'
-            --server="http://192.168.56.110"
-            --lang=fr
-            --pass=azerty123!!
-            superwiki
-            admin
+      - name: Run a script with arguments (free form)
+        ansible.builtin.script: "{{ project_dir }}"/wikidevops/maintenance/install.php --dbuser=WIKI_DB_User --dbpass=WIKI_DB_PSSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_1.35.2_install --confpath=appli/projects/MWC/mediawiki/MWC_1.35.2_install  --server="http://192.168.56.110" --lang=fr --pass=azerty123!! superwiki admin
