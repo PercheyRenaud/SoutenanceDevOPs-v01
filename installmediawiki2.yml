@@ -55,17 +55,17 @@
 #           update_cache: yes
 
 
-      # - name: install php7.3
-      #   package:
-      #     name: "{{ item }}"
-      #     state: present
-      #     update_cache: yes
-      #   Loop:
-      #     - php
-      #     - php-MySQL
-      #     - php-xml
-      #     - php-mbstring
-      #
+      - name: install php7.3
+        package:
+          name: "{{ item }}"
+          state: present
+          update_cache: yes
+        Loop:
+          - php
+          - php-MySQL
+          - php-xml
+          - php-mbstring
+
       # - name: install apache2
       #   package:
       #     name: "{{ item }}"
