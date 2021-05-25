@@ -33,6 +33,9 @@
     line: " DocumentRoot {{ project_dir }}"
 
 - name: restart apache2
-  service:
-    name: apache2
-    state: restarted
+  notify: restart apache2
+  # service:
+  #   name: apache2
+  #   state: restarted
+
+  

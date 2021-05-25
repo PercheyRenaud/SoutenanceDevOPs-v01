@@ -120,45 +120,45 @@
 #         command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='azerty123!!' superwiki admin"
 #         when: skip_install.rc > 0
 
-###Config apache2
-
-
-      - name: setting apache root dir to {{ project_dir }}
-        lineinfile:
-          path: /etc/apache2/sites-available/000-default.conf
-          regexp: DocumentRoot
-          line: " DocumentRoot {{ project_dir }}"
-
-
-      - name: checking apache2.conf
-        command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
-        register: skip_a2conf
-        ignore_errors: true
-        changed_when: false
-
-      - name: adding directory to apache2.conf
-        blockinfile:
-          path: /etc/apache2/apache2.conf
-          block: |
-            <Directory /appli/projects/MWC/mediawiki>
-              Options Indexes FollowSymLinks
-              AllowOverride None
-              Require all granted
-              Allow from all
-            </Directory>
-        when: skip_a2conf.rc > 0
-
-
-      - name: config apache2 - 000-default.conf
-        ansible.builtin.lineinfile:
-            path: /etc/apache2/sites-available/000-default.conf
-            regexp: DocumentRoot
-            line: " DocumentRoot {{ project_dir }}"
-
-      - name: restart apache2
-        service:
-          name: apache2
-          state: restarted
+# ###Config apache2
+#
+#
+#       - name: setting apache root dir to {{ project_dir }}
+#         lineinfile:
+#           path: /etc/apache2/sites-available/000-default.conf
+#           regexp: DocumentRoot
+#           line: " DocumentRoot {{ project_dir }}"
+#
+#
+#       - name: checking apache2.conf
+#         command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
+#         register: skip_a2conf
+#         ignore_errors: true
+#         changed_when: false
+#
+#       - name: adding directory to apache2.conf
+#         blockinfile:
+#           path: /etc/apache2/apache2.conf
+#           block: |
+#             <Directory /appli/projects/MWC/mediawiki>
+#               Options Indexes FollowSymLinks
+#               AllowOverride None
+#               Require all granted
+#               Allow from all
+#             </Directory>
+#         when: skip_a2conf.rc > 0
+#
+#
+#       - name: config apache2 - 000-default.conf
+#         ansible.builtin.lineinfile:
+#             path: /etc/apache2/sites-available/000-default.conf
+#             regexp: DocumentRoot
+#             line: " DocumentRoot {{ project_dir }}"
+#
+#       - name: restart apache2
+#         service:
+#           name: apache2
+#           state: restarted
 
 
   ###recupération des donnees.xml
