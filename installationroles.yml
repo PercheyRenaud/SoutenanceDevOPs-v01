@@ -8,6 +8,9 @@
       - role: wp.mysqlBD
       - role: wp.installmediawiki
       - role: wp.config_apache2
+      - role: wp.import_donnees.xml
+      - role: wp.import_image
+      - role: wp.import_logo
       # - role:
     vars:
       - livr_dir: /appli/mediawiki/LIVR/28-05
