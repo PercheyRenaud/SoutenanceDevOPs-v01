@@ -135,4 +135,4 @@
         ansible.builtin.lineinfile:
             path: /etc/apache2/sites-available/000-default.conf
             regexp: /var/www/html
-              line: "{{ project_dir }}"
+            line: "{{ project_dir }}"
