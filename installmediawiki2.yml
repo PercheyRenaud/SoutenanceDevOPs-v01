@@ -143,7 +143,7 @@
 
 
       - name: checking apache2.conf
-        command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.config
+        command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
         register: skip_a2conf
         ignore_errors: true
         changed_when: false
