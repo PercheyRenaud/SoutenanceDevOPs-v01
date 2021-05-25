@@ -160,7 +160,10 @@
 
     #restart apache2
       - name: restart apache
-        notify: restart apache2
+        service:
+          name: apache2
+          state: restarted
+      #  notify: restart apache2
 
 
 
@@ -233,8 +236,8 @@
 
 
         ## HANDLERS
-    handlers:
-      - name: restart apache2
-        service:
-          name: apache2
-          state: restarted
+    # handlers:
+    #   - name: restart apache2
+    #     service:
+    #       name: apache2
+    #       state: restarted
