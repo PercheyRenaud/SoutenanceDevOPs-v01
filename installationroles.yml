@@ -5,8 +5,8 @@
     roles:
       - role: wp.prerequis
       - role: wp.deversement
-      # - role:
-      # - role:
+      - role: wp.mysqlBD
+      - role: wp.installmediawiki
       # - role:
     vars:
       - livr_dir: /appli/mediawiki/LIVR/28-05

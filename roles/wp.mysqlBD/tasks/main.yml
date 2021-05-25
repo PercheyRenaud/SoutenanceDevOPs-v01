@@ -1,0 +1,14 @@
+---
+# tasks file for wp.mysqlBD
+  #creare mediawiki Mysql database
+- name: create mediawiki mysql database
+  mysql_db:
+    name: WIKI_DB
+    state: present
+
+- name: create mediawiki mysql User
+  mysql_user:
+    name: WIKI_DB_USER
+    host: localhost
+    password: WIKI_DB_PASSWD
+    priv: WIKI_DB.*:ALL

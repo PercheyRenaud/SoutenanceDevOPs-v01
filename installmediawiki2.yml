@@ -58,67 +58,67 @@
 #         when: skip_unpack.rc > 0
 
 
-
-      - name: install php7.3
-        package:
-          name:
-            - php
-            - php-mysql
-            - php-xml
-            - php-mbstring
-            - python3-mysqldb
-          state: present
-          update_cache: yes
-
-      - name: install apache2
-        package:
-          name:
-            - apache2
-            - libapache2-mod-php
-          state: present
-          update_cache: yes
-
-      - name: install MariaDB
-        apt:
-          name: mariadb-server
-          state: present
-
-      - name: start MariaDB on boot
-        systemd:
-          name: mariadb
-          state: started
-          enabled: yes
+      #
+      # - name: install php7.3
+      #   package:
+      #     name:
+      #       - php
+      #       - php-mysql
+      #       - php-xml
+      #       - php-mbstring
+      #       - python3-mysqldb
+      #     state: present
+      #     update_cache: yes
+      #
+      # - name: install apache2
+      #   package:
+      #     name:
+      #       - apache2
+      #       - libapache2-mod-php
+      #     state: present
+      #     update_cache: yes
+      #
+      # - name: install MariaDB
+      #   apt:
+      #     name: mariadb-server
+      #     state: present
+      #
+      # - name: start MariaDB on boot
+      #   systemd:
+      #     name: mariadb
+      #     state: started
+      #     enabled: yes
 
 # DATABASE SERVER
 
 #config
 
 
-  #creare mediawiki Mysql database
-      - name: create mediawiki mysql database
-        mysql_db:
-          name: WIKI_DB
-          state: present
+  # #creare mediawiki Mysql database
+  #     - name: create mediawiki mysql database
+  #       mysql_db:
+  #         name: WIKI_DB
+  #         state: present
+  #
+  #     - name: create mediawiki mysql User
+  #       mysql_user:
+  #         name: WIKI_DB_USER
+  #         host: localhost
+  #         password: WIKI_DB_PASSWD
+  #         priv: WIKI_DB.*:ALL
 
-      - name: create mediawiki mysql User
-        mysql_user:
-          name: WIKI_DB_USER
-          host: localhost
-          password: WIKI_DB_PASSWD
-          priv: WIKI_DB.*:ALL
-
-#idemptotence check localSetting.php
-      - name: checking for pre-existing LocalSettings
-        command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
-        register: skip_install
-        ignore_errors: true
-        changed_when: false
-
-###### PHP.install
-
-      - name: Installing mediawiki
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='azerty123!!' superwiki admin"
-        when: skip_install.rc > 0
+# #idemptotence check localSetting.php
+#       - name: checking for pre-existing LocalSettings
+#         command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+#         register: skip_install
+#         ignore_errors: true
+#         changed_when: false
+#
+# ###### PHP.install
+#
+#       - name: Installing mediawiki
+#         command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='azerty123!!' superwiki admin"
+#         when: skip_install.rc > 0
 
 ###Config apache2
 
