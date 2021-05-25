@@ -198,11 +198,11 @@
           creates: "{{ project_dir }}/MWC_01.00.00_install/ressources/assets/LoGo/GRC-135.png"
         # when: skip_unpack_image.rc > 0
 
-  - name: config setting.conf pour LOGO
-    ansible.builtin.lineinfile:
-        path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings
-        regexp: $wgLogos
-        line: " $wgLogos = [ '1x => "$wgResourceBasePath/resources/assets/GRC-135.png" ];
+      - name: config setting.conf pour LOGO
+        ansible.builtin.lineinfile:
+          path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings
+          regexp: $wgLogos
+          line: " $wgLogos = [ '1x => "$wgResourceBasePath/resources/assets/GRC-135.png" ];
       # - name: renaming
       #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
       #   when: skip_unpack.rc > 0
