@@ -118,11 +118,20 @@
 #                user=root
 #         password={{ root_password }}
 
+
+
+#idemptotence check
+      - name: checking for pre-existing LocalSettings
+        command: car "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+        register: skip_install
+        ignore_errors: true
+        changed_when: false
+
 ###### PHP.install
 
       - name: Installing mediawiki
         command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='azerty123!!' superwiki admin"
-
+        when: skip_install.rc > 0
 
 ###Config apache2
       # - name: config apache2
