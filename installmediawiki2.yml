@@ -113,7 +113,7 @@
 ###### PHP.install
 
       - name: Run a script with arguments (free form)
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_01.00.00_install --confpath=appli/projects/MWC/mediawiki/MWC_01.00.00_install  --server="http://192.168.56.110" --lang=fr --pass='azerty123!!' superwiki admin"
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_01.00.00_install --confpath=appli/projects/MWC/mediawiki/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='azerty123!!' superwiki admin"
 
 
       # - name: run script install.php
