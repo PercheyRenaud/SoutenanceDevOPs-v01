@@ -55,19 +55,19 @@
 #           update_cache: yes
 
       - name: install apache2 and php7.3
-      #   apt:
-      #     name: "{{ item }}"
-      #     update_cache: yes
-      #     state: present
-      #   Loop:
-      #     - apache2
-      #     - php
-      #     - php-mysql
-      #     - libapache2-mod-php
-      #     - php-xml
-      #     - php-mbstring
-      #     #state: present
-      #     #update_cache: yes
+        apt:
+          name: "{{ item }}"
+          update_cache: yes
+          state: present
+        Loop:
+          - apache2
+          - php
+          - php-mysql
+          - libapache2-mod-php
+          - php-xml
+          - php-mbstring
+          #state: present
+          #update_cache: yes
 
       - name: install python
         package:
