@@ -33,6 +33,13 @@
           path: "{{ project_dir }}"
           state: directory
 
+#idemptotence check
+      - name: checking for existing pacakge
+        command: ls "{{ project_dir }}/MWC_01.00.00_install"
+        register: skip_unpack
+        ignore_errors: true
+        changed_when: false
+
 #-tar de mediawiki
       - name: Extract wikidevop.tar.gz > wikidevops
         unarchive:
@@ -42,10 +49,12 @@
           owner: wmcuser
           remote_src: yes
           creates: "{{ project_dir }}/wikidevops"
+        when: skip_unpack.rc > 0
 
 # #renaming
       - name: renaming
         command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+        when: skip_unpack.rc > 0
             #creates: "{{ project_dir }}"
 
 # #apt update_cache
