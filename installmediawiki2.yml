@@ -123,7 +123,7 @@
             --dbname="WIKI_DB"
             --dbserver=localhost
             --dbtype=mysql
-            --scriptpath=/mediawiki/MWC_01.00.00_install
+            --scriptpath="/mediawiki/MWC_01.00.00_install"
             --confpath="{{ project_dir }}"'/MWC_01.00.00_install'
             --server="http://192.168.56.110"
             --lang=fr
