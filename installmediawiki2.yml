@@ -78,7 +78,7 @@
         package:
           name:
             - python2
-            - python2-mysqldb
+            #- python2-mysqldb
           update_cache: yes
           state: present
 
