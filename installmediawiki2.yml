@@ -62,6 +62,7 @@
             - php-mysql
             - php-xml
             - php-mbstring
+            - python3-mysqldb
           state: present
           update_cache: yes
 
@@ -74,13 +75,13 @@
           state: present
           update_cache: yes
 
-      - name: install python
-        package:
-          name:
-            - python2
-            #- python2-mysqldb
-          update_cache: yes
-          state: present
+      # - name: install python
+      #   package:
+      #     name:
+      #       - python2
+      #       #- python2-mysqldb
+      #     update_cache: yes
+      #     state: present
 
       - name: install MariaDB
         apt:
