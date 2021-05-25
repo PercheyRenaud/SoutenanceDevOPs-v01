@@ -9,59 +9,55 @@
     - package_path: /tmp/INPUT.zip
   tasks:
 
-#unzip
-      - name: install unzip package
-        package:
-          name: unzip
-          state: present
+# #unzip  OK
+#       - name: install unzip package
+#         package:
+#           name: unzip
+#           state: present
 
-#livraison package
-      - name: Creates directory LIVR
-        file:
-          path: "{{ livr_dir }}"
-          state: directory
+# #livraison package
+#       - name: Creates directory LIVR
+#         file:
+#           path: "{{ livr_dir }}"
+#           state: directory
+#
+#       - name: Unzip input.zip
+#         unarchive:
+#           src: "{{ package_path }}"
+#           dest: "{{ livr_dir }}"
+#           remote_src: yes
+#           creates: "{{ livr_dir }}/INPUT"
+#
+# #deversement des livrables
+#       - name: Creates directory projects/MWC/mediawiki
+#         file:
+#           path: "{{ project_dir }}"
+#           state: directory
+#
+# #idemptotence check
+#       - name: checking for pre-existing package
+#         command: ls "{{ project_dir }}/MWC_01.00.00_install"
+#         register: skip_unpack
+#         ignore_errors: true
+#         changed_when: false
+#
+# #-tar de mediawiki
+#       - name: Extract wikidevop.tar.gz > wikidevops
+#         unarchive:
+#           src: "{{ livr_dir }}/INPUT/PACKAGE/wikidevops.tar.gz"
+#           dest: "{{ project_dir }}"
+#           mode: 0755
+#           owner: wmcuser
+#           remote_src: yes
+#           creates: "{{ project_dir }}/wikidevops"
+#         when: skip_unpack.rc > 0
+#
+# # #renaming
+#       - name: renaming
+#         command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+#         when: skip_unpack.rc > 0
 
-      - name: Unzip input.zip
-        unarchive:
-          src: "{{ package_path }}"
-          dest: "{{ livr_dir }}"
-          remote_src: yes
-          creates: "{{ livr_dir }}/INPUT"
 
-#deversement des livrables
-      - name: Creates directory projects/MWC/mediawiki
-        file:
-          path: "{{ project_dir }}"
-          state: directory
-
-#idemptotence check
-      - name: checking for pre-existing package
-        command: ls "{{ project_dir }}/MWC_01.00.00_install"
-        register: skip_unpack
-        ignore_errors: true
-        changed_when: false
-
-#-tar de mediawiki
-      - name: Extract wikidevop.tar.gz > wikidevops
-        unarchive:
-          src: "{{ livr_dir }}/INPUT/PACKAGE/wikidevops.tar.gz"
-          dest: "{{ project_dir }}"
-          mode: 0755
-          owner: wmcuser
-          remote_src: yes
-          creates: "{{ project_dir }}/wikidevops"
-        when: skip_unpack.rc > 0
-
-# #renaming
-      - name: renaming
-        command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
-        when: skip_unpack.rc > 0
-            #creates: "{{ project_dir }}"
-
-# #apt update_cache
-#       - name: apt update
-#         apt:
-#           update_cache: yes
 
       - name: install php7.3
         package:
@@ -111,14 +107,6 @@
           password: WIKI_DB_PASSWD
           priv: WIKI_DB.*:ALL
 
-
-#   - name: Create MySQL config
-#     copy:
-#       dest: "/root/.my.cnf"
-#       content: |
-#                user=root
-#         password={{ root_password }}
-
 #idemptotence check localSetting.php
       - name: checking for pre-existing LocalSettings
         command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
@@ -167,20 +155,13 @@
             regexp: DocumentRoot
             line: " DocumentRoot {{ project_dir }}"
 
-
-
       - name: restart apache2
         service:
           name: apache2
           state: restarted
-  ###recupération des donnees.xml
 
-# ###"idemptotence check donnnes.xml"
-#       - name: checking for pre-existing donnees.xml
-#         command: cat "{{ project_dir }}/MWC_01.00.00_install/    "
-#         register: skip_donnees
-#         ignore_errors: true
-#         changed_when: false
+
+  ###recupération des donnees.xml
 
       - name: Import donnnees.xml
         command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
@@ -215,12 +196,6 @@
       - name : rebuildrecentchanges.php
         command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
 ####LOGO
-#impotence du logo
-# - name: checking for pre-existing packkage logo
-#   command: ls "{{ project_dir }}/MWC_01.00.00_install/images/DevOps.png"
-#   register: skip_unpack_image
-#   ignore_errors: true
-#   changed_when: false
 
       - name: Extract LoGo.tar.gz > GRC-135.png
         unarchive:
@@ -237,6 +212,5 @@
           path: "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
           regexp: '1x'
           line: "$wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/LoGo/GRC-135.png\" ];"
-      # - name: renaming
-      #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
-      #   when: skip_unpack.rc > 0
+
+...
