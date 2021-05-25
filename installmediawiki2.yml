@@ -41,10 +41,10 @@
           remote_src: yes
           creates: "{{ project_dir }}/wikidevops"
 
-#renomage
-      - name: renaming
-        command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}""/MWC_01.00.00_install"
-        creates: "{{ project_dir }}"
+# #renomage
+#       - name: renaming
+#         command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}""/MWC_01.00.00_install"
+#         #creates: "{{ project_dir }}"
 
 # #apt update_cache
 #       - name: apt update
