@@ -202,7 +202,7 @@
       - name: Extract dump_image.tar.gz > DevOps.png
         unarchive:
           src: "{{ livr_dir }}/INPUT/PACKAGE/dump_image.tar.gz"
-          dest: "{{ livr_dir }}/INPUT/PACKAGE/images/"
+          dest: "{{ livr_dir }}/INPUT/PACKAGE/"
           mode: 0755
           owner: wmcuser
           remote_src: yes
