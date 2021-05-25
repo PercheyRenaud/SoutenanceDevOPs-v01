@@ -58,4 +58,4 @@
         enabled: yes
 
     - name: reloading environment
-    command: "bash"
+      command: "bash"
