@@ -38,13 +38,16 @@
         unarchive:
           src: "{{ livr_dir }}/INPUT/PACKAGE/wikidevops.tar.gz"
           dest: "{{ project_dir }}"
+          mode: 0755
+          user: wmcuser
           remote_src: yes
           creates: "{{ project_dir }}/wikidevops"
 
 # #renaming
-#       - name: renaming
-#         command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
-#         #creates: "{{ project_dir }}"
+       - name: renaming
+         arg:
+            command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+         creates: "{{ project_dir }}"
 
 # #apt update_cache
 #       - name: apt update
