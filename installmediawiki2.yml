@@ -178,7 +178,7 @@
         when: skip_unpack_image.rc > 0
 
       - name : importimages.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD"
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/projects/MWC/mediawiki/MWC_01.00.00_Install/images/Images"
 
 
       # - name: renaming
