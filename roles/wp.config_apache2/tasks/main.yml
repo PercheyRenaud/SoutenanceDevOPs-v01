@@ -31,11 +31,9 @@
     path: /etc/apache2/sites-available/000-default.conf
     regexp: DocumentRoot
     line: " DocumentRoot {{ project_dir }}"
-
-- name: restart apache2
   notify: restart apache2
+
+# - name: restart apache2
   # service:
   #   name: apache2
   #   state: restarted
-
-  
