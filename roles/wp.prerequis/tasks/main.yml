@@ -32,7 +32,7 @@
     state: present
 
 - name: start MariaDB on boot
-    systemd:
-      name: mariadb
+  systemd:
+    name: mariadb
     state: started
     enabled: yes
