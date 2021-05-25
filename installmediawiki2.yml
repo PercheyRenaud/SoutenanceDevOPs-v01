@@ -168,6 +168,11 @@
             line: " DocumentRoot {{ project_dir }}"
 
 
+
+      - name: restart apache2
+        service:
+          name: apache2
+          state: restarted
   ###recupération des donnees.xml
 
 # ###"idemptotence check donnnes.xml"
