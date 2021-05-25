@@ -34,7 +34,7 @@
           state: directory
 
 #idemptotence check
-      - name: checking for existing pacakge
+      - name: checking for pre-existing pacakge
         command: ls "{{ project_dir }}/MWC_01.00.00_install"
         register: skip_unpack
         ignore_errors: true
