@@ -28,7 +28,7 @@
           creates: "{{ livr_dir }}/INPUT"
 
 #deversement des livrables
-      - name: Creates directory projects/MWC/mediawiki
+      - name: Creates directory {{ project_dir }}
         file:
           path: "{{ project_dir }}"
           state: directory
@@ -122,7 +122,7 @@
 
 #idemptotence check
       - name: checking for pre-existing LocalSettings
-        command: car "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+        command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
         register: skip_install
         ignore_errors: true
         changed_when: false
