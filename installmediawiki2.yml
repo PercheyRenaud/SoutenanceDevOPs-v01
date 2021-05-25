@@ -6,6 +6,7 @@
   vars:
     - livr_dir: /appli/mediawiki/LIVR/28-05
     - project_dir: /appli/projects/MWC/mediawiki
+    - package_path: /tmp/INPUT.zip
   tasks:
 
 #unzip
@@ -22,7 +23,7 @@
 
       - name: Unzip input.zip
         unarchive:
-          src: /tmp/INPUT.zip
+          src: "{{ package_path }}"
           dest: "{{ livr_dir }}"
           remote_src: yes
           creates: "{{ livr_dir }}/INPUT"
@@ -132,14 +133,15 @@
         when: skip_install.rc > 0
 
 ###Config apache2
-####000-default
+
+
       - name: setting apache root dir to {{ project_dir }}
-        ansible.builtin.lineinfile:
+        lineinfile:
           path: /etc/apache2/sites-available/000-default.conf
           regexp: DocumentRoot
           line: " DocumentRoot {{ project_dir }}"
 
-###apache2.conf
+
       - name: checking apache2.conf
         command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
         register: skip_a2conf
@@ -158,14 +160,12 @@
             </Directory>
         when: skip_a2conf.rc > 0
 
-    #restart apache2
-      - name: restart apache
-        service:
-          name: apache2
-          state: restarted
-      #  notify: restart apache2
 
-
+      - name: config apache2 - 000-default.conf
+        ansible.builtin.lineinfile:
+            path: /etc/apache2/sites-available/000-default.conf
+            regexp: DocumentRoot
+            line: " DocumentRoot {{ project_dir }}"
 
 
   ###recupération des donnees.xml
@@ -207,8 +207,6 @@
       - name : importImages.php
         command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/projects/MWC/mediawiki/MWC_01.00.00_Install/images/Images"
 
-      - name : rebuildrecentchanges.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
 ####LOGO
 #impotence du logo
 # - name: checking for pre-existing packkage logo
@@ -228,18 +226,10 @@
         # when: skip_unpack_image.rc > 0
 
       - name: config setting.conf pour LOGO
-        lineinfile:
-          path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings.php
+        ansible.builtin.lineinfile:
+          path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings
           regexp: $wgLogos
-          line: " $wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/GRC-135.png\" ]; "
+          line: "$wgLogos = [ '1x' => "$wgResourceBasePath/resources/assets/LoGo/GRC-135.png" ];"
       # - name: renaming
       #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
       #   when: skip_unpack.rc > 0
-
-
-        ## HANDLERS
-    # handlers:
-    #   - name: restart apache2
-    #     service:
-    #       name: apache2
-    #       state: restarted
