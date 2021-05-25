@@ -26,3 +26,17 @@ stages {
           sh 'echo "test"'
       }
     }
+
+    stage ('DEV : Installation des prerequis') {
+        environment {
+          ANSIBLE_FORCE_COLOR = true
+        }
+        steps {
+          ansiblePlaybook (
+            colorized: true,
+            playbook: 'installationroles.yml',
+            inventory: 'inventories/hosts',
+            extras: '${VERBOSE}'
+          )
+        }
+      }
