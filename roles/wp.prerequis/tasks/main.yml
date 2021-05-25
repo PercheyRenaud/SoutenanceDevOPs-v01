@@ -34,5 +34,5 @@
 - name: start MariaDB on boot
     systemd:
       name: mariadb
-      state: started
-      enabled: yes
+    state: started
+    enabled: yes
