@@ -170,11 +170,11 @@
       - name: Extract dump_image.tar.gz > DevOps.png
         unarchive:
           src: "{{ livr_dir }}/INPUT/PACKAGE/dump_image.tar.gz"
-          dest: "{{ project_dir }}/MWC_01.00.00_install/images"
+          dest: "{{ project_dir }}/MWC_01.00.00_install/images/"
           mode: 0755
           owner: wmcuser
           remote_src: yes
-          creates: "{{ project_dir }}/MWC_01.00.00_install/images"
+          creates: "{{ project_dir }}/MWC_01.00.00_install/images/"
         when: skip_unpack_image.rc > 0
 
       # - name: renaming
