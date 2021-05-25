@@ -54,6 +54,35 @@
 #         apt:
 #           update_cache: yes
 
+
+      - name: install  php7.3
+        package:
+          name: "{{ item }}"
+          state: present
+        Loop:
+          - php
+          - php-MySQL
+          - php-xml
+          - php-mbstring
+
+      - name: install  apache2
+        package:
+          name: "{{ item }}"
+          state: present
+        Loop:
+          - apahe2
+          - libapache2-mod-php
+
+
+            # Loop:
+            #   - apache2
+            #   - php
+            #   - php-mysql
+            #   - libapache2-mod-php
+            #   - php-xml
+            #   - php-mbstring
+              #state: present
+              #update_cache: yes
       - name: install apache2 and php7.3
         apt:
           name: apache2
