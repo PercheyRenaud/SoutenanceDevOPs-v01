@@ -210,7 +210,7 @@
         when: skip_unpack_image.rc > 0
 
       - name : importImages.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/projects/MWC/mediawiki/MWC_01.00.00_Install/images/Images"
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/projects/MWC/mediawiki/MWC_01.00.00_Install/images"
 
 ####LOGO
 #impotence du logo
