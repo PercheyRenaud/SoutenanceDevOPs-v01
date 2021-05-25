@@ -39,7 +39,7 @@
           src: "{{ livr_dir }}/INPUT/PACKAGE/wikidevops.tar.gz"
           dest: "{{ project_dir }}"
           mode: 0755
-          user: wmcuser
+          owner: wmcuser
           remote_src: yes
           creates: "{{ project_dir }}/wikidevops"
 
