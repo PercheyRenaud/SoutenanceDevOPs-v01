@@ -48,16 +48,13 @@
       # - name: renomage
       #   command: mv /appli/projects/MWC/mediawiki/wikidevops /appli/projects/MWC/mediawiki/MWC01.00.00install
       #   creates: /appli/projects/MWC/mediawiki/MWC01.00.00install
-#
 
 # #apt update_cache
 #       - name: apt update
 #         apt:
 #           update_cache: yes
 
-
-
-      # - name: install apache2 and php7.3
+      - name: install apache2 and php7.3
       #   apt:
       #     name: "{{ item }}"
       #     update_cache: yes
@@ -75,12 +72,11 @@
       - name: install python
         package:
           name: "{{ item }}"
-          update_cahce: yes
+          update_cache: yes
           state: present
         Loop:
           - python3
           - python3-mysqldb
-
 
       - name: install MariaDB
         apt:
@@ -94,13 +90,6 @@
           enabled: yes
 
 # DATABASE SERVER
-
-      # - name: install mysql
-      #   apt:
-      #     name:
-      #       - mysql-server
-      #    state: present
-      #    update_cache: yes
 
   #creare mediawiki Mysql database
       - name: create mediawiki mysql DATAbase
