@@ -56,3 +56,6 @@
         name: mariadb
         state: started
         enabled: yes
+
+    - name: reloading environment
+    command: "bash"
