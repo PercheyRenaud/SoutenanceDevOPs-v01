@@ -123,7 +123,7 @@
       #     remote_src: yes
 
       - name: run script
-        shell: 'appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php'
+        shell: "{{ project_dir }}"'/MWC_01.00.00_install/maintenance/install.php'
         args:
             --dbuser=WIKI_DB_USER
             --dbpass=WIKI_DB_PSSWD
@@ -131,7 +131,7 @@
             --dbserver=localhost
             --dbtype=mysql
             --scriptpath=/mediawiki/MWC_01.00.00_install
-            --confpath=appli/projects/MWC/mediawiki/MWC_01.00.00_install'
+            --confpath="{{ project_dir }}"'/MWC_01.00.00_install'
             --server="http://192.168.56.110"
             --lang=fr
             --pass=azerty123!!
