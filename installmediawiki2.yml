@@ -20,12 +20,6 @@
           path: "{{ livr_dir }}"
           state: directory
 
-      #     #livraison package
-      # - name: Creates directory test
-      #   file:
-      #     path: /tmp/testautorisation
-      #     state: directory
-
       - name: Unzip input.zip
         unarchive:
           src: /tmp/INPUT.zip
@@ -56,7 +50,6 @@
 #       - name: apt update
 #         apt:
 #           update_cache: yes
-
 
       - name: install php7.3
         package:
@@ -122,12 +115,12 @@
       #     cmd: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_User --dbpass=WIKI_DB_PSSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/mediawiki/MWC_1.35.2_install --confpath=appli/projects/MWC/mediawiki/MWC_1.35.2_install  --server="http://192.168.56.110" --lang=fr --pass=azerty123!! superwiki admin
       #     remote_src: yes
 
-      - name: run script
+      - name: run script install.php
         shell: "{{ project_dir }}"'/MWC_01.00.00_install/maintenance/install.php'
         args:
-            --dbuser=WIKI_DB_USER
-            --dbpass=WIKI_DB_PSSWD
-            --dbname=WIKI_DB
+            --dbuser="WIKI_DB_USER"
+            --dbpass="WIKI_DB_PASSWD"
+            --dbname="WIKI_DB"
             --dbserver=localhost
             --dbtype=mysql
             --scriptpath=/mediawiki/MWC_01.00.00_install
