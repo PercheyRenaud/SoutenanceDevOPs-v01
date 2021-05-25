@@ -55,7 +55,7 @@
 #           update_cache: yes
 
 
-      - name: install  php7.3
+      - name: install php7.3
         package:
           name: "{{ item }}"
           state: present
@@ -65,7 +65,7 @@
           - php-xml
           - php-mbstring
 
-      - name: install  apache2
+      - name: install apache2
         package:
           name: "{{ item }}"
           state: present
@@ -83,11 +83,11 @@
             #   - php-mbstring
               #state: present
               #update_cache: yes
-      - name: install apache2 and php7.3
-        apt:
-          name: apache2
-          update_cache: yes
-          state: present
+      # - name: install apache2 and php7.3
+      #   apt:
+      #     name: apache2
+      #     update_cache: yes
+      #     state: present
         # Loop:
         #   - apache2
         #   - php
