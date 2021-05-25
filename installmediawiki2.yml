@@ -59,30 +59,28 @@
         package:
           name:
             - php
-            - php-MySQL
+            - php-mysql
             - php-xml
             - php-mbstring
           state: present
           update_cache: yes
-      
 
 
-      # - name: install apache2
-      #   package:
-      #     name: "{{ item }}"
-      #     state: present
-      #   Loop:
-      #     - apahe2
-      #     - libapache2-mod-php
-      #
-      # - name: install python
-      #   package:
-      #     name: "{{ item }}"
-      #     update_cache: yes
-      #     state: present
-      #   Loop:
-      #     - python3
-      #     - python3-mysqldb
+      - name: install apache2
+        package:
+          name:
+            - apahe2
+            - libapache2-mod-php
+          state: present
+          update_cache: yes
+
+      - name: install python
+        package:
+          name:
+            - python2
+            - python2-mysqldb
+          update_cache: yes
+          state: present
 
       - name: install MariaDB
         apt:
