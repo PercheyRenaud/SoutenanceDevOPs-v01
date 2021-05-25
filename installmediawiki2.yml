@@ -44,10 +44,10 @@
           creates: "{{ project_dir }}/wikidevops"
 
 # #renaming
-       # - name: renaming
-       #   command:
-       #      argv: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
-       #      creates: "{{ project_dir }}"
+       - name: renaming
+         command:
+            argv: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+            creates: "{{ project_dir }}"
 
 # #apt update_cache
 #       - name: apt update
