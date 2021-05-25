@@ -135,5 +135,5 @@
       - name: config apache2 - 000-default.conf
         ansible.builtin.lineinfile:
             path: /etc/apache2/sites-available/000-default.conf
-            regexp: /var/www/html
-            line: "    DocumentRoot {{ project_dir }}"
+            regexp: DocumentRoot
+            line: " DocumentRoot {{ project_dir }}"
