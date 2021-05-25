@@ -58,9 +58,9 @@
 
 
       - name: install apache2 and php7.3 et modules comp
-        package:
+        apt:
           name: "{{ item }}"
-          #update_cache: yes
+          update_cache: yes
           state: present
         Loop:
           - apache2
