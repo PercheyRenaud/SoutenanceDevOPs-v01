@@ -149,7 +149,7 @@
 
       - name: adding directory to apache2.conf
         blockinfile:
-          path: /etc/apache2/apache2.config
+          path: /etc/apache2/apache2.conf
           block: |
             <Directory /appli/projects/MWC/mediawiki>
               Options Indexes FollowSymLinks
@@ -158,6 +158,13 @@
               Allow from all
             </Directory>
         when: skip_a2conf.rc > 0
+
+
+      - name: config apache2 - 000-default.conf
+        ansible.builtin.lineinfile:
+            path: /etc/apache2/sites-available/000-default.conf
+            regexp: DocumentRoot
+            line: " DocumentRoot {{ project_dir }}"
 
 
   ###recupération des donnees.xml
@@ -221,7 +228,7 @@
         ansible.builtin.lineinfile:
           path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings
           regexp: $wgLogos
-          line: " $wgLogos = [ '1x => \"$wgResourceBasePath/resources/assets/GRC-135.png\" ]; "
+          line: " $wgLogos = [ '1x => "$wgResourceBasePath/resources/assets/GRC-135.png" ];
       # - name: renaming
       #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
       #   when: skip_unpack.rc > 0
