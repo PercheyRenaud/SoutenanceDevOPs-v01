@@ -47,7 +47,7 @@
 #renomage
       - name: renomage
         command: mv /appli/projects/MWC/mediawiki/wikidevops "/appli/projects/MWC/mediawiki/MWC_01.00.00_install"
-        creates: /appli/projects/MWC/mediawiki/MWC_01.00.00_install
+        creates: /appli/projects/MWC/mediawiki/
 
 # #apt update_cache
 #       - name: apt update
