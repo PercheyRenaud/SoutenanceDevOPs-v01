@@ -45,8 +45,8 @@
 
 # #renaming
        - name: renaming
-         arg:
-            command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
+         command:
+            args: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
          creates: "{{ project_dir }}"
 
 # #apt update_cache
