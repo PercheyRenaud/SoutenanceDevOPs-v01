@@ -131,8 +131,8 @@
       #       regexp: /var/www/html
       #       line: {{ project_dir }}
 
-        - name: config apache2 -000defautl.conf
-          ansible.builtin.lineinfile:
-              path: /etc/apache2/site-available/000-default.conf
-              regexp: /var/www/html
-              line: {{ project_dir }}
+      - name: config apache2 -000defautl.conf
+        ansible.builtin.lineinfile:
+            path: /etc/apache2/site-available/000-default.conf
+            regexp: /var/www/html
+            line: {{ project_dir }}
