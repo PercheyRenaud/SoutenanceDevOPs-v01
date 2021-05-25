@@ -24,7 +24,7 @@
         Require all granted
         Allow from all
       </Directory>
-    when: skip_a2conf.rc > 0
+  when: skip_a2conf.rc > 0
 
 - name: config apache2 - 000-default.conf
   lineinfile:
