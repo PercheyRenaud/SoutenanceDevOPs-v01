@@ -183,11 +183,11 @@
 #         changed_when: false
 
       - name: Import donnnees.xml
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
+        command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
         #when: skip_donnees.rc > 0
 
       - name : rebuildrecentchanges.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+        command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
 
 
 ##########"recupération image"
@@ -210,10 +210,10 @@
         when: skip_unpack_image.rc > 0
 
       - name : importImages.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD {{ project_dir }}/MWC_01.00.00_Install/images/"
+        command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD {{ project_dir }}/MWC_01.00.00_Install/images/"
 
       - name : rebuildrecentchanges.php
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+        command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
 ####LOGO
 #impotence du logo
 # - name: checking for pre-existing packkage logo
@@ -234,7 +234,7 @@
 
       - name: config setting.conf pour LOGO
         lineinfile:
-          path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings.php
+          path: {{ project_dir }}/MWC_01.00.00_install/LocalSettings.php
           regexp: '1x'
           line: "$wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/LoGo/GRC-135.png\" ];"
       # - name: renaming
