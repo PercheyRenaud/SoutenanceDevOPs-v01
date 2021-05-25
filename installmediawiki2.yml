@@ -142,7 +142,7 @@
 
 
       - name: checking apache2.conf
-        command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.config
+        command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
         register: skip_a2conf
         ignore_errors: true
         changed_when: false
@@ -158,6 +158,8 @@
               Allow from all
             </Directory>
         when: skip_a2conf.rc > 0
+
+
   ###recupération des donnees.xml
 
 # ###"idemptotence check donnnes.xml"
@@ -219,7 +221,7 @@
         ansible.builtin.lineinfile:
           path: /appli/projects/MWC/mediawiki/MWC_01.00.00_install/LocalSettings
           regexp: $wgLogos
-          line: " $wgLogos = [ '1x => "$wgResourceBasePath/resources/assets/GRC-135.png" ]; "
+          line: " $wgLogos = [ '1x => \"$wgResourceBasePath/resources/assets/GRC-135.png\" ]; "
       # - name: renaming
       #   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
       #   when: skip_unpack.rc > 0
