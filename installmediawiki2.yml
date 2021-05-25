@@ -57,7 +57,7 @@
 
 
 
-      - name: install apache2 and php7.3 et modules comp
+      - name: install apache2 and php7.3
         apt:
           name: "{{ item }}"
           update_cache: yes
