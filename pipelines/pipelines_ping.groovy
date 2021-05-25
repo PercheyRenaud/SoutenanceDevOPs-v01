@@ -27,7 +27,7 @@ stages {
       }
     }
 
-    stage ('DEV : Installation des prerequis') {
+    stage ('DEV : Installation de mediawiki') {
         environment {
           ANSIBLE_FORCE_COLOR = true
         }
