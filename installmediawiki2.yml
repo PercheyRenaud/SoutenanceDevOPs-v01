@@ -177,8 +177,8 @@
           creates: "{{ project_dir }}/MWC_01.00.00_install/images/DevOps.png"
         when: skip_unpack_image.rc > 0
 
-      - name : importimagephp
-        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/ImportImages.php"
+      - name : importimages.php
+        command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/importImages.php"
 
 
       # - name: renaming
