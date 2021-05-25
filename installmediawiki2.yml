@@ -158,13 +158,12 @@
             </Directory>
         when: skip_a2conf.rc > 0
 
-    #restart
-
+    #restart apache2
       - name: restart apache
         notify: restart apache2
 
-  ##  HANDLERS
-    handlers:
+  ## HANDLERS
+handlers:
       - name: restart apache2
         service:
           name: apache2
