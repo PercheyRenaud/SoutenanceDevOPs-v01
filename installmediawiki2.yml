@@ -115,7 +115,7 @@
       #     remote_src: yes
 
       - name: run script install.php
-        shell: "{{ project_dir }}/MWC_01.00.00_install/maintenance/install.php"
+        cmd: "{{ project_dir }}/MWC_01.00.00_install/maintenance/install.php"
         # args:
         #     --dbuser="WIKI_DB_USER"
         #     --dbpass="WIKI_DB_PASSWD"
