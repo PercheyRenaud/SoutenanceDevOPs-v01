@@ -163,7 +163,7 @@
         notify: restart apache2
 
   ## HANDLERS
-    handlers:
+      handlers:
       - name: restart apache2
         service:
           name: apache2
