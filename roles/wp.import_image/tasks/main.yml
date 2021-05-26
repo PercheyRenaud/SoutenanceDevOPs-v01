@@ -18,15 +18,18 @@
     owner: wmcuser
     remote_src: yes
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+  register: import
   # when: skip_unpack_image.rc > 0
   tags: image
+
 
 - name : importImages.php
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
-    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+  when: import.rc == 0
   tags: image
 
 - name : rebuildrecentchanges.php
   command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+  when: import.rc == 0
   tags: image
