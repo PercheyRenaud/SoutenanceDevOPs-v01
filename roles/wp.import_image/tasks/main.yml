@@ -31,5 +31,5 @@
 
 - name : rebuildrecentchanges.php
   command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
-  when: import_image is defined 0
+  when: import_image is defined
   tags: image
