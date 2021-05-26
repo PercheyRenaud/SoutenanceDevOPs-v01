@@ -1,0 +1,26 @@
+---
+# tasks file for wp.import_image
+##########"recupération image"
+
+#idemptotence check image
+- name: checking for pre-existing package_image
+  command: ls "{{ project_dir }}/MWC_01.00.00_install/images/DevOps.png"
+  register: skip_unpack_image
+  ignore_errors: true
+  changed_when: false
+
+- name: Extract dump_image.tar.gz > DevOps.png
+  unarchive:
+    src: "{{ livr_dir }}/INPUT/PACKAGE/dump_image.tar.gz"
+    dest: "{{ livr_dir }}/INPUT/PACKAGE/"
+    mode: 0755
+    owner: wmcuser
+    remote_src: yes
+    creates: "{{ livr_dir }}/INPUT/PACKAGE/images/DevOps.png"
+  when: skip_unpack_image.rc > 0
+
+- name : importImages.php
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD {{ livr_dir }}/INPUT/PACKAGE/images/"
+
+- name : rebuildrecentchanges.php
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"

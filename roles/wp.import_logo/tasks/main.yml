@@ -1,0 +1,19 @@
+---
+# tasks file for wp.import_logo
+###LOGO
+
+- name: Extract LoGo.tar.gz > GRC-135.png
+  unarchive:
+    src: "{{ livr_dir }}/INPUT/PACKAGE/LoGo.tar.gz"
+    dest: "{{ project_dir }}/MWC_01.00.00_install/resources/assets"
+    mode: 0755
+    owner: wmcuser
+    remote_src: yes
+    creates: "{{ project_dir }}/MWC_01.00.00_install/ressources/assets/LoGo/GRC-135.png"
+    # when: skip_unpack_image.rc > 0
+
+- name: config setting.conf pour LOGO
+  lineinfile:
+    path: "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+    regexp: '1x'
+    line: "$wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/LoGo/GRC-135.png\" ];"

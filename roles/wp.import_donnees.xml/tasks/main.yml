@@ -1,0 +1,10 @@
+---
+# tasks file for wp.import_donnees.xml
+  ###recupération des donnees.xml
+
+- name: Import donnnees.xml
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
+    #when: skip_donnees.rc > 0
+
+- name : rebuildrecentchanges.php
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"

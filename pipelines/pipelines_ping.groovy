@@ -12,7 +12,7 @@ stages {
       steps {
       checkout([
                 $class: 'GitSCM',
-                branches: [[name: '*/develop']],
+                branches: [[name: '*/Develop']],
                 doGenerateSubmoduleConfigurations: false,
                 extensions: [],
                 submoduleCfg: [],
@@ -26,3 +26,19 @@ stages {
           sh 'echo "test"'
       }
     }
+
+    stage ('Installation de mediawiki') {
+        environment {
+          ANSIBLE_FORCE_COLOR = true
+        }
+        steps {
+          ansiblePlaybook (
+            colorized: true,
+            playbook: 'installationroles.yml',
+            inventory: 'inventories/hosts',
+            extras: '${VERBOSE}'
+          )
+        }
+      }
+}
+}
