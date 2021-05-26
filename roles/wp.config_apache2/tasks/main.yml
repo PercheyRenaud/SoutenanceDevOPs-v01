@@ -8,6 +8,7 @@
     regexp: DocumentRoot
     line: " DocumentRoot {{ project_dir }}"
 
+#DOIT DISPARAITRE
 - name: checking apache2.conf
   command: grep -Fq "{{ project_dir }}" /etc/apache2/apache2.conf
   register: skip_a2conf
@@ -31,9 +32,9 @@
     path: /etc/apache2/sites-available/000-default.conf
     regexp: DocumentRoot
     line: " DocumentRoot {{ project_dir }}"
-  notify: restart apache2
+  #notify: restart apache2
 
-# - name: restart apache2
-  # service:
-  #   name: apache2
-  #   state: restarted
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
