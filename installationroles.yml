@@ -11,7 +11,7 @@
       - role: wp.installmediawiki
       - role: wp.config_apache2
       - role: wp.import_donnees.xml
-    
+
 
       # - role:
     vars:
@@ -22,6 +22,7 @@
       - log_disk: /dev/sdc
       - mysql_data_dir: /var/lib/mysql
       - mysql_data_dir_mounted: false
+      - import_image: false
       - mdp_bdd: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36633039326332613937343134643161633161623266643035333733313434626664363531343964

@@ -31,7 +31,8 @@
     owner: wmcuser
     remote_src: yes
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
-  register: import_image
+  set_fact:
+    import_image: true
   # when: skip_unpack_image.rc > 0
   tags: importdata
 
@@ -39,12 +40,12 @@
 - name : importImages.php
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
-  when: import_image is defined and import_image.change
+  when: import_image is true
   tags: importdata
 
 - name : rebuildrecentchanges.php
   command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
-  when: import_image is defined and import_image.change
+  when: import_image is true 
   tags: importdata
 
 
