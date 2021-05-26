@@ -6,7 +6,14 @@
   vars:
     - livr_dir: /appli/mediawiki/LIVR/28-05
     - project_dir: /appli/projects/MWC/mediawiki
-    - package_path: /tmp/INPUT.zip
+    - package_path: INPUT.zip
+#    - mdp: !vault |
+#          $ANSIBLE_VAULT;1.1;AES256
+#          33343663356161353664396463306230646438383035393134386466623463313263633335363535
+#          6337386638313066393938366362636234663738306530630a333634613438616134623665373261
+#          37373538396164623165666264386132323633326339376633313362393463643134303938393131
+#          3864316237373737340a363637333636313835376438373733643865623738316130366363643164
+#          3531
   tasks:
 
 #unzip
@@ -25,7 +32,6 @@
         unarchive:
           src: "{{ package_path }}"
           dest: "{{ livr_dir }}"
-          remote_src: yes
           creates: "{{ livr_dir }}/INPUT"
 
 #deversement des livrables

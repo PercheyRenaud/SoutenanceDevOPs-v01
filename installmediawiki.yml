@@ -4,7 +4,28 @@
   vars:
     - data_disk: /dev/sdb
     - log_disk: /dev/sdc
+    - mysql_data_dir: /var/lib/mysql
+    - mysql_data_dir_mounted: false
   tasks:
+    - name: display setup
+      debug:
+        var: ansible_mounts
+        verbosity: 1
+
+    - name: Check if {{ mysql_data_dir }} is already a mountpoint
+      set_fact:
+        mysql_data_dir_mounted: "{% for mounts in ansible_mounts %}{% if mounts.mount == mysql_data_dir %}true{% endif %}{% endfor %}"
+
+    - name: display setup
+      debug:
+        var: mysql_data_dir_mounted
+        verbosity: 1
+
+    - name: install xfs tools
+      apt:
+        name: xfsprogs
+        state: present
+
     - name: Create a xfs filesystem on {{ log_disk }} to store system logs
       filesystem:
         fstype: xfs
@@ -17,39 +38,57 @@
         state: mounted
         fstype: xfs
 
-    - name: install xfs tools
-      apt:
-        name: xfsprogs
-        state: present
-
     - name: Create a xfs filesystem on {{ data_disk }} to store MySQL data
       filesystem:
         fstype: xfs
         dev: "{{ data_disk }}"
 
-    - name: Create directory /var/lib/mysql
-      file:
-        path: /var/lib/mysql
-        state: directory
-
-    - name: mount {{ data_disk }} on /var/lib/mysql
-      mount:
-        src: "{{ data_disk }}"
-        path: /var/lib/mysql
-        state: mounted
-        fstype: xfs
-
-    - name: change permissions on /var/lib/mysql
-      file:
-        path: /var/lib/mysql
-        state: directory
-        owner: mysql
-        group: mysql
-
     - name: install MariaDB
       apt:
         name: mariadb-server
         state: present
+
+    - block:
+        - name: mount {{ data_disk }} on /mnt
+          mount:
+            src: "{{ data_disk }}"
+            path: /mnt
+            state: mounted
+            fstype: xfs
+
+        - name: stop MariaDB
+          systemd:
+            name: mariadb
+            state: stopped
+
+        - name: copy original database
+          copy:
+            src: /var/lib/mysql/
+            dest: /mnt
+            owner: mysql
+            group: mysql
+            remote_src: yes
+
+        - name: unmount {{ data_disk }} from /mnt
+          mount:
+            src: "{{ data_disk }}"
+            path: /mnt
+            state: absent
+
+        - name: mount {{ data_disk }} on /var/lib/mysql
+          mount:
+            src: "{{ data_disk }}"
+            path: /var/lib/mysql
+            state: mounted
+            fstype: xfs
+
+        - name: change permissions on /var/lib/mysql
+          file:
+            path: /var/lib/mysql
+            state: directory
+            owner: mysql
+            group: mysql
+      when: not mysql_data_dir_mounted
 
     - name: start MariaDB on boot
       systemd:
@@ -57,9 +96,9 @@
         state: started
         enabled: yes
 
-  handlers:
-      - name: restart mariadb
-        service:
-          name: mariadb
-          state: restarted
+  #handlers:
+    #  - name: restart mariadb
+    #    service:
+    #      name: mariadb
+    #      state: restarted
 ...
