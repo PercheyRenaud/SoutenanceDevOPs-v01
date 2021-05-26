@@ -13,3 +13,4 @@
     permanent: yes
     state: enabled
   tags: firewalld
+  notify: restart firewalld
