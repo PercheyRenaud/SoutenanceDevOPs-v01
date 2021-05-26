@@ -20,7 +20,7 @@
         Allow from all
       </Directory>
   when: skip_a2conf.rc > 0
-    tags: apache2
+  tags: apache2
 
   #notify: restart apache2
 
