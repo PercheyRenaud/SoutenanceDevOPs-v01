@@ -18,4 +18,4 @@
     path: "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
     regexp: '1x'
     line: "$wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/LoGo/GRC-135.png\" ];"
-  tag: logo
+  tags: logo
