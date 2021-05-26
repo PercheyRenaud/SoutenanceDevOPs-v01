@@ -36,6 +36,7 @@ stages {
         }
         steps {
           ansiblePlaybook (
+            credentialsId: 'Secret text',
             colorized: true,
             playbook: 'installationroles.yml',
             inventory: 'inventories/hosts',
