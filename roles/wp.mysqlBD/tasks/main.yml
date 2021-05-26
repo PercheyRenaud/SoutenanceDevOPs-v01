@@ -1,6 +1,6 @@
 ---
 # tasks file for wp.mysqlBD
-  #creare mediawiki Mysql database
+  #create mediawiki Mysql database
 - name: create mediawiki mysql database
   mysql_db:
     name: WIKI_DB
