@@ -9,7 +9,7 @@
 
 
 - name: permit traffic on port 8080
-  ansible.posix.firewalld:
+  firewalld:
     port: 8080/tcp
     permanent: yes
     state: enabled
