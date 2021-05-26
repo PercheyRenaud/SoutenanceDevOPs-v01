@@ -4,12 +4,12 @@
   debug:
     var: ansible_mounts
     verbosity: 1
-  tags: FS
+  tags: filesystem
 
 - name: Check if {{ mysql_data_dir }} is already a mountpoint
   set_fact:
     mysql_data_dir_mounted: "{% for mounts in ansible_mounts %}{% if mounts.mount == mysql_data_dir %}true{% endif %}{% endfor %}"
- tags: FS
+  tags: filesystem
 
 - name: display setup
   debug:
@@ -21,13 +21,13 @@
   apt:
     name: xfsprogs
     state: present
-tags: FS
+  tags: filesystem
 
 - name: Create a xfs filesystem on {{ log_disk }} to store system logs
   filesystem:
     fstype: xfs
     dev: "{{ log_disk }}"
-tags: FS
+  tags: filesystem
 
 - name: mount {{ log_disk }} on /var/log
   mount:
@@ -35,10 +35,10 @@ tags: FS
     path: /var/log
     state: mounted
     fstype: xfs
-  tags: FS
+  tags: filesystem
 
 - name: Create a xfs filesystem on {{ data_disk }} to store MySQL data
   filesystem:
     fstype: xfs
     dev: "{{ data_disk }}"# tasks file for wp.creation_FS
-  tags: FS
+  tags: filesystem
