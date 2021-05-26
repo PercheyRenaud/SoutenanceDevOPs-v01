@@ -13,7 +13,7 @@
       path: /mnt
       state: mounted
       fstype: xfs
-     tags: mariadb
+    tags: mariadb
 
   - name: stop MariaDB
     systemd:
