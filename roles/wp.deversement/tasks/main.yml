@@ -10,7 +10,6 @@
   unarchive:
     src: "{{ package_path }}"
     dest: "{{ livr_dir }}"
-    remote_src: yes
     creates: "{{ livr_dir }}/INPUT"
 
 #deversement des livrables
