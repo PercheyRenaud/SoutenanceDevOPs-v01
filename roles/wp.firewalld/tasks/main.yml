@@ -4,7 +4,7 @@
   package:
     name: firewalld
     state: present
-  tags: firewall
+  tags: firewalld
 
 
 - name: permit traffic on port 8080
@@ -12,4 +12,4 @@
     port: 8080/tcp
     permanent: yes
     state: enabled
-  tags: firewall
+  tags: firewalld
