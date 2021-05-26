@@ -12,7 +12,7 @@ stages {
       steps {
       checkout([
                 $class: 'GitSCM',
-                branches: [[name: '*/develop']],
+                branches: [[name: '*/Develop']],
                 doGenerateSubmoduleConfigurations: false,
                 extensions: [],
                 submoduleCfg: [],
