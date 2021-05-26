@@ -39,12 +39,12 @@
 - name : importImages.php
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
-  when: import_image is defined
+  when: import_image is defined and import_image.change
   tags: importdata
 
 - name : rebuildrecentchanges.php
   command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
-  when: import_image is defined
+  when: import_image is defined and import_image.change
   tags: importdata
 
 
