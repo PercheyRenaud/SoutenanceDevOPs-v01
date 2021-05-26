@@ -40,6 +40,7 @@ stages {
             colorized: true,
             playbook: 'installationroles.yml',
             tags: 'deversement',
+            tags: 'prerequis',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}'
           )

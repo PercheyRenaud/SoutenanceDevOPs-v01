@@ -5,6 +5,7 @@
   package:
     name: unzip
     state: present
+  tags: prerequis
 
 
 - name: install php7.3
@@ -17,6 +18,7 @@
       - python3-mysqldb
     state: present
     update_cache: yes
+  tags: prerequis
 
 - name: install apache2
   package:
@@ -25,3 +27,4 @@
       - libapache2-mod-php
     state: present
     update_cache: yes
+  tags: prerequis
