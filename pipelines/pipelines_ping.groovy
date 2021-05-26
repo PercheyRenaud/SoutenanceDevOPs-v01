@@ -139,5 +139,71 @@ stages {
               }
             }
 
+            stage ('Installation de mediawiki_import_xml') {
+                environment {
+                  ANSIBLE_FORCE_COLOR = true
+                }
+                steps {
+                  ansiblePlaybook (
+                    vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+                    colorized: true,
+                    playbook: 'installationroles.yml',
+                    tags: 'apache2',
+                    inventory: 'inventories/hosts',
+                    extras: '${VERBOSE}'
+                  )
+                }
+              }
+
+              stage ('Installation de mediawiki_import_xml') {
+                  environment {
+                    ANSIBLE_FORCE_COLOR = true
+                  }
+                  steps {
+                    ansiblePlaybook (
+                      vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+                      colorized: true,
+                      playbook: 'installationroles.yml',
+                      tags: 'donneesxml',
+                      inventory: 'inventories/hosts',
+                      extras: '${VERBOSE}'
+                    )
+                  }
+                }
+
+                stage ('Installation de mediawiki_import_image') {
+                    environment {
+                      ANSIBLE_FORCE_COLOR = true
+                    }
+                    steps {
+                      ansiblePlaybook (
+                        vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+                        colorized: true,
+                        playbook: 'installationroles.yml',
+                        tags: 'image',
+                        inventory: 'inventories/hosts',
+                        extras: '${VERBOSE}'
+                      )
+                    }
+                  }
+
+                  stage ('Installation de mediawiki_import_logo') {
+                      environment {
+                        ANSIBLE_FORCE_COLOR = true
+                      }
+                      steps {
+                        ansiblePlaybook (
+                          vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+                          colorized: true,
+                          playbook: 'installationroles.yml',
+                          tags: 'logo',
+                          inventory: 'inventories/hosts',
+                          extras: '${VERBOSE}'
+                        )
+                      }
+                    }
+
+
+
 }
 }
