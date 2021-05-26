@@ -27,19 +27,7 @@ stages {
       }
     }
 
-    stage ('Installation des FS') {
-        environment {
-          ANSIBLE_FORCE_COLOR = true
-        }
-        steps {
-          ansiblePlaybook (
-            colorized: true,
-            playbook: 'installation_FS.yml',
-            inventory: 'inventories/hosts',
-            extras: '${VERBOSE}'
-          )
-        }
-      }
+
 
 
     stage ('Installation de mediawiki') {
