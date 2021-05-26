@@ -10,5 +10,5 @@
   mysql_user:
     name: WIKI_DB_USER
     host: localhost
-    password: WIKI_DB_PASSWD
+    password: "{{ mdp_bdd }}"
     priv: WIKI_DB.*:ALL
