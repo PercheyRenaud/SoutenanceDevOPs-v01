@@ -24,19 +24,20 @@
     owner: wmcuser
     remote_src: yes
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
-    set_fact:
-      import_image: true
   tags: importdata
 
 
 - name : importImages.php
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
+    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
   when: import_image
   tags: importdata
 
 - name : rebuildrecentchanges.php
-  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+  command: 
+    cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
   when: import_image
   tags: importdata
 
