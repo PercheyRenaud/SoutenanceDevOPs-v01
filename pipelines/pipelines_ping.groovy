@@ -38,7 +38,7 @@ stages {
           ansiblePlaybook (
             vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
             colorized: true,
-            tags: deversement
+            tags: 'deversement',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}'
           )
