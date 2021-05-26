@@ -9,7 +9,7 @@
 
 - name: permit traffic on port 8080
   firewalld:
-    port: 8080
+    port: 80
     permanent: yes
     state: enabled
   tags: firewalld
