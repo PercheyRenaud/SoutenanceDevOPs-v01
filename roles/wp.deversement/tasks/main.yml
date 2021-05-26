@@ -5,18 +5,21 @@
   file:
     path: "{{ livr_dir }}"
     state: directory
+  tags: deversement
 
 - name: Unzip input.zip
   unarchive:
     src: "{{ package_path }}"
     dest: "{{ livr_dir }}"
     creates: "{{ livr_dir }}/INPUT"
+  tags: deversement
 
 #deversement des livrables
 - name: Creates directory projects/MWC/mediawiki
   file:
     path: "{{ project_dir }}"
     state: directory
+  tags: deversement
 
 #idemptotence check
 - name: checking for pre-existing package
@@ -24,6 +27,7 @@
   register: skip_unpack
   ignore_errors: true
   changed_when: false
+  tags: deversement
 
 #-tar de mediawiki
 - name: Extract wikidevop.tar.gz > wikidevops
@@ -35,8 +39,9 @@
     remote_src: yes
     creates: "{{ project_dir }}/wikidevops"
   when: skip_unpack.rc > 0
-
+  tags: deversement
 # #renaming
 - name: renaming
   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
   when: skip_unpack.rc > 0
+  tag: deversement 
