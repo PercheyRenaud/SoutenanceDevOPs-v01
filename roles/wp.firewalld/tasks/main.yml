@@ -8,7 +8,7 @@
   tags: firewall
 
 
-- name: permit traffic on port 8080/tcp
+- name: permit traffic on port 8080
   ansible.posix.firewalld:
     port: 8080/tcp
     permanent: yes
