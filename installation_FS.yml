@@ -4,6 +4,7 @@
     become: true
     roles:
       - role: wp.installation_FS
+      - role: wp.install_maria_DB
 
       # - role:
     vars:
