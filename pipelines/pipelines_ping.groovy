@@ -21,11 +21,6 @@ stages {
       }
     }
 
-    stage ('MODELE TEST') {
-      steps {
-          sh 'echo "test"'
-      }
-    }
 
     stage ('Installation de mediawiki_creation_FS') {
         environment {
@@ -139,7 +134,7 @@ stages {
               }
             }
 
-    
+
               stage ('Installation de mediawiki_import_xml') {
                   environment {
                     ANSIBLE_FORCE_COLOR = true
