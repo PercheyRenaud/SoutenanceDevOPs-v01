@@ -1,0 +1,16 @@
+---
+# tasks file for wp.firewalld
+- name: firewalld
+    package:
+      name: firewalld
+      state: present
+      update_cache: yes
+  tags: firewall
+
+
+- name: permit traffic on port 8080/tcp
+  ansible.posix.firewalld:
+    port: 8080/tcp
+    permanent: yes
+    state: enabled
+  tags: firewall

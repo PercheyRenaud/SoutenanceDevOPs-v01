@@ -54,6 +54,22 @@ stages {
           }
         }
 
+        stage ('Installation de mediawiki_firewalld') {
+            environment {
+              ANSIBLE_FORCE_COLOR = true
+            }
+            steps {
+              ansiblePlaybook (
+                vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+                colorized: true,
+                playbook: 'installationroles.yml',
+                tags: 'firewalld',
+                inventory: 'inventories/hosts',
+                extras: '${VERBOSE}'
+              )
+            }
+          }
+
     stage ('Installation de mediawiki_prerequis') {
         environment {
           ANSIBLE_FORCE_COLOR = true
