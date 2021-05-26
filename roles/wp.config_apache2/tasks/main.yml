@@ -19,12 +19,13 @@
         Require all granted
         Allow from all
       </Directory>
+  notify: restart apache2
   tags: apache2
 
   #notify: restart apache2
 
-- name: restart apache2
-  service:
-    name: apache2
-    state: restarted
-  tags: apache2
+# - name: restart apache2
+#   service:
+#     name: apache2
+#     state: restarted
+#   tags: apache2
