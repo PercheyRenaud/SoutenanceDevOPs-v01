@@ -31,8 +31,8 @@
     owner: wmcuser
     remote_src: yes
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
-  set_fact:
-    import_image: true
+    set_fact:
+      import_image: true
   # when: skip_unpack_image.rc > 0
   tags: importdata
 
@@ -45,7 +45,7 @@
 
 - name : rebuildrecentchanges.php
   command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
-  when: import_image is true 
+  when: import_image is true
   tags: importdata
 
 
