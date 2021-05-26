@@ -1,2 +1,54 @@
 ---
 # tasks file for wp.install_maria_DB
+    - name: install MariaDB
+      apt:
+        name: mariadb-server
+        state: present
+
+    - block:
+        - name: mount {{ data_disk }} on /mnt
+          mount:
+            src: "{{ data_disk }}"
+            path: /mnt
+            state: mounted
+            fstype: xfs
+
+        - name: stop MariaDB
+          systemd:
+            name: mariadb
+            state: stopped
+
+        - name: copy original database
+          copy:
+            src: /var/lib/mysql/
+            dest: /mnt
+            owner: mysql
+            group: mysql
+            remote_src: yes
+
+        - name: unmount {{ data_disk }} from /mnt
+          mount:
+            src: "{{ data_disk }}"
+            path: /mnt
+            state: absent
+
+        - name: mount {{ data_disk }} on /var/lib/mysql
+          mount:
+            src: "{{ data_disk }}"
+            path: /var/lib/mysql
+            state: mounted
+            fstype: xfs
+
+        - name: change permissions on /var/lib/mysql
+          file:
+            path: /var/lib/mysql
+            state: directory
+            owner: mysql
+            group: mysql
+      when: not mysql_data_dir_mounted
+
+    - name: start MariaDB on boot
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
