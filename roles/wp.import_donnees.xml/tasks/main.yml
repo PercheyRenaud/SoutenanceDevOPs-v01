@@ -24,6 +24,7 @@
     owner: wmcuser
     remote_src: yes
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+    register: need_to_import
   tags: importdata
 
 
@@ -31,14 +32,14 @@
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
-  when: import_image
+  when: need_to_import != 1
   tags: importdata
 
 - name : rebuildrecentchanges.php
-  command: 
+  command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
     creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
-  when: import_image
+  when: need_to_import != 1
   tags: importdata
 
 
