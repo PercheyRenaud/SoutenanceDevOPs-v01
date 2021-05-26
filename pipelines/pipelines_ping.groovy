@@ -39,7 +39,7 @@ stages {
             vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
             colorized: true,
             playbook: 'installationroles.yml',
-            tags: 'deversement', 'prerequis',
+            tags: 'deversement', 
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}'
           )
