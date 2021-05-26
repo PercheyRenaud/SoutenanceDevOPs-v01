@@ -27,7 +27,7 @@ stages {
       }
     }
 
-    stage ('DEV : Installation de mediawiki') {
+    stage ('Installation de mediawiki') {
         environment {
           ANSIBLE_FORCE_COLOR = true
         }
@@ -40,4 +40,5 @@ stages {
           )
         }
       }
+}
 }
