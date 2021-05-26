@@ -5,7 +5,6 @@
 - name: Import donnnees.xml
   command:
     cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
-    creates
     #when: skip_donnees.rc > 0
   tags: importdata
 
