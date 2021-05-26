@@ -8,11 +8,11 @@
 
 - block:
   - name: mount {{ data_disk }} on /mnt
-      mount:
-        src: "{{ data_disk }}"
-        path: /mnt
-        state: mounted
-        fstype: xfs
+    mount:
+      src: "{{ data_disk }}"
+      path: /mnt
+      state: mounted
+      fstype: xfs
      tags: mariadb
 
   - name: stop MariaDB
