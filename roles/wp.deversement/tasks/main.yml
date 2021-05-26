@@ -44,4 +44,4 @@
 - name: renaming
   command: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
   when: skip_unpack.rc > 0
-  tag: deversement 
+  tags: deversement 
