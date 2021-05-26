@@ -3,6 +3,8 @@
   - hosts: mediawiki
     become: true
     roles:
+      - role: wp.creation_FS
+      - role: wp.install_maria_DB
       - role: wp.prerequis
       - role: wp.deversement
       - role: wp.mysqlBD
@@ -11,6 +13,7 @@
       - role: wp.import_donnees.xml
       - role: wp.import_image
       - role: wp.import_logo
+
       # - role:
     vars:
       - livr_dir: /appli/mediawiki/LIVR/28-05
