@@ -4,6 +4,7 @@
       apt:
         name: mariadb-server
         state: present
+     tags: mariadb
 
     - block:
         - name: mount {{ data_disk }} on /mnt
@@ -12,11 +13,13 @@
             path: /mnt
             state: mounted
             fstype: xfs
+          tags: mariadb
 
         - name: stop MariaDB
           systemd:
             name: mariadb
             state: stopped
+          tags: mariadb
 
         - name: copy original database
           copy:
@@ -25,12 +28,14 @@
             owner: mysql
             group: mysql
             remote_src: yes
+          tags: mariadb
 
         - name: unmount {{ data_disk }} from /mnt
           mount:
             src: "{{ data_disk }}"
             path: /mnt
             state: absent
+          tags: mariadb
 
         - name: mount {{ data_disk }} on /var/lib/mysql
           mount:
@@ -38,6 +43,7 @@
             path: /var/lib/mysql
             state: mounted
             fstype: xfs
+          tags: mariadb
 
         - name: change permissions on /var/lib/mysql
           file:
@@ -46,9 +52,11 @@
             owner: mysql
             group: mysql
       when: not mysql_data_dir_mounted
+          tags: mariadb
 
     - name: start MariaDB on boot
       systemd:
         name: mariadb
         state: started
         enabled: yes
+      tags: mariadb

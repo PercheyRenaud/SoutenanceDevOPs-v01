@@ -6,9 +6,11 @@
   register: skip_install
   ignore_errors: true
   changed_when: false
+  tags: mediawiki
 
 ###### PHP.install
 
 - name: Installing mediawiki
   command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='{{ mdp_connexion_wm }}' superwiki admin"
   when: skip_install.rc > 0
+  tags: mediawiki
