@@ -7,9 +7,9 @@
   tags: firewalld
 
 
-- name: permit traffic on port 8080
+- name: permit traffic on port 80
   firewalld:
-    port: 80
+    port: 80/tcp
     permanent: yes
     state: enabled
   tags: firewalld
