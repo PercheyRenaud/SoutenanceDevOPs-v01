@@ -51,12 +51,13 @@
       state: directory
       owner: mysql
       group: mysql
-    when: not mysql_data_dir_mounted
-    tags: mariadb
+      tags: mariadb
+  when: not mysql_data_dir_mounted
+  
 
-  - name: start MariaDB on boot
-    systemd:
-      name: mariadb
-      state: started
-      enabled: yes
+- name: start MariaDB on boot
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
     tags: mariadb
