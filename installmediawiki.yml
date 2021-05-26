@@ -96,9 +96,5 @@
         state: started
         enabled: yes
 
-  #handlers:
-    #  - name: restart mariadb
-    #    service:
-    #      name: mariadb
-    #      state: restarted
+
 ...
