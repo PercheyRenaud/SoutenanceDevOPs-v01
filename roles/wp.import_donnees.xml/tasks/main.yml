@@ -3,7 +3,7 @@
   ###recupération des donnees.xml
 
 - name: Import donnnees.xml
-  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/Donnees.xml"
     #when: skip_donnees.rc > 0
   tags: importdata
 
