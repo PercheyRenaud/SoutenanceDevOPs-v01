@@ -7,7 +7,7 @@
         tags: [creation_FS]
       - role: mw.dependencies
         tags: [dependencies]
-      - role: mw.deversement
+      - role: mw.pre-install
         tags: [pre-install]
       - role: mw.installmediawiki
         tags: [install_mediawiki]
