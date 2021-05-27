@@ -54,21 +54,21 @@ stages {
           }
         }
 
-    stage ('Préparation de l'installation') {
-        environment {
-          ANSIBLE_FORCE_COLOR = true
+      stage ('Préparation de l'installation') {
+          environment {
+            ANSIBLE_FORCE_COLOR = true
+          }
+          steps {
+            ansiblePlaybook (
+              vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
+              colorized: true,
+              playbook: 'installationroles.yml',
+              tags: 'pre-install',
+              inventory: 'inventories/hosts',
+              extras: '${VERBOSE}'
+            )
+          }
         }
-        steps {
-          ansiblePlaybook (
-            vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
-            colorized: true,
-            playbook: 'installationroles.yml',
-            tags: 'pre-install',
-            inventory: 'inventories/hosts',
-            extras: '${VERBOSE}'
-          )
-        }
-      }
 
     stage ('Installation de mediawiki') {
         environment {
