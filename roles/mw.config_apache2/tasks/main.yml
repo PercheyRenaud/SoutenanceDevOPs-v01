@@ -7,7 +7,6 @@
     path: /etc/apache2/sites-available/000-default.conf
     regexp: DocumentRoot
     line: " DocumentRoot {{ project_dir }}"
-  tags: apache2
 
 - name: adding directory to apache2.conf
   blockinfile:
@@ -20,7 +19,6 @@
         Allow from all
       </Directory>
   notify: restart apache2
-  tags: apache2
 
   #notify: restart apache2
 

@@ -5,7 +5,6 @@
   package:
     name: unzip
     state: present
-  tags: prerequis
 
 
 - name: install php7.3
@@ -17,7 +16,6 @@
       - php-mbstring
       - python3-mysqldb
     state: present
-  tags: prerequis
 
 - name: install apache2
   package:
@@ -25,4 +23,3 @@
       - apache2
       - libapache2-mod-php
     state: present
-  tags: prerequis

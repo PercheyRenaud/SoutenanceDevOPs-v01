@@ -12,5 +12,6 @@
     port: 80/tcp
     permanent: yes
     state: enabled
+    immediate: yes
 #  tags: firewalld
-  notify: restart firewalld
+#  notify: restart firewalld
