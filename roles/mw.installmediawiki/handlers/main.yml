@@ -1,2 +1,5 @@
 ---
-# handlers file for wp.installmediawiki
+  - name: restart apache2
+    systemd:
+      name: apache2
+      state: restarted
