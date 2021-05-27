@@ -41,3 +41,17 @@
     cmd: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
     creates: "{{ project_dir }}/wikidevops"
 #  when: skip_unpack.rc > 0
+
+- name: create mediawiki mysql database
+  mysql_db:
+    name: WIKI_DB
+    state: present
+  tags: prerequis
+
+- name: create mediawiki mysql User
+  mysql_user:
+    name: WIKI_DB_USER
+    host: localhost
+    password: "{{ mdp_bdd }}"
+    priv: WIKI_DB.*:ALL
+  tags: prerequis
