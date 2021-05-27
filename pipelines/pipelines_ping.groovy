@@ -38,7 +38,7 @@ stages {
         }
       }
 
-      stage ('Installation de mediawiki_creation_Maria_DB') {
+      stage ('Installation des dépendances') {
           environment {
             ANSIBLE_FORCE_COLOR = true
           }
@@ -47,14 +47,14 @@ stages {
               vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
               colorized: true,
               playbook: 'installationroles.yml',
-              tags: 'firewalld',
+              tags: 'dependencies',
               inventory: 'inventories/hosts',
               extras: '${VERBOSE}'
             )
           }
         }
 
-    stage ('Installation de mediawiki_prerequis') {
+    stage ('Préparation de l'installation') {
         environment {
           ANSIBLE_FORCE_COLOR = true
         }
@@ -63,14 +63,14 @@ stages {
             vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
             colorized: true,
             playbook: 'installationroles.yml',
-            tags: 'dependencies',
+            tags: 'pre-install',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}'
           )
         }
       }
 
-    stage ('Installation de mediawiki_deversement') {
+    stage ('Installation de mediawiki') {
         environment {
           ANSIBLE_FORCE_COLOR = true
         }
@@ -79,60 +79,12 @@ stages {
             vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
             colorized: true,
             playbook: 'installationroles.yml',
-            tags: 'deversement',
+            tags: 'install_mediawiki',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}'
           )
         }
       }
-
-      stage ('Installation de mediawiki_newdb') {
-          environment {
-            ANSIBLE_FORCE_COLOR = true
-          }
-          steps {
-            ansiblePlaybook (
-              vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
-              colorized: true,
-              playbook: 'installationroles.yml',
-              tags: 'config_wikiDB',
-              inventory: 'inventories/hosts',
-              extras: '${VERBOSE}'
-            )
-          }
-        }
-
-        stage ('Installation de mediawiki') {
-            environment {
-              ANSIBLE_FORCE_COLOR = true
-            }
-            steps {
-              ansiblePlaybook (
-                vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
-                colorized: true,
-                playbook: 'installationroles.yml',
-                tags: 'install_mediawiki',
-                inventory: 'inventories/hosts',
-                extras: '${VERBOSE}'
-              )
-            }
-          }
-
-          stage ('Installation de mediawiki_config_apache2') {
-              environment {
-                ANSIBLE_FORCE_COLOR = true
-              }
-              steps {
-                ansiblePlaybook (
-                  vaultCredentialsId: '1cb0cef4-ed37-48da-a9e7-5dc68ac27f95',
-                  colorized: true,
-                  playbook: 'installationroles.yml',
-                  tags: 'config_apache2',
-                  inventory: 'inventories/hosts',
-                  extras: '${VERBOSE}'
-                )
-              }
-            }
 
 
     }

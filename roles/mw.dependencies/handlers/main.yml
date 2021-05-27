@@ -1,2 +1,6 @@
 ---
-# handlers file for wp.prerequis
+  #Plus nécessaire, grâce à l'attribut immediate
+  - name: restart firewalld
+    systemd:
+      name: firewalld
+      state: restarted

@@ -1,6 +1,0 @@
----
-# handlers file for wp.config_apache2
-  - name: restart apache2
-    systemd:
-      name: apache2
-      state: restarted

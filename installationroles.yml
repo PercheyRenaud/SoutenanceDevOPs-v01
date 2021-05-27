@@ -5,18 +5,13 @@
     roles:
       - role: mw.creation_FS
         tags: [creation_FS]
-      - role: mw.firewalld
-        tags: [firewalld]
-      - role: mw.prerequis
+      - role: mw.dependencies
         tags: [dependencies]
       - role: mw.deversement
-        tags: [deversement]
-      - role: mw.mysqlBD
-        tags: [config_wikiDB]
+        tags: [pre-install]
       - role: mw.installmediawiki
         tags: [install_mediawiki]
-      - role: mw.config_apache2
-        tags: [config_apache2]
+
       # - role: wp.import_donnees.xml
 
 
