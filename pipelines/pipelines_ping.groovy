@@ -22,7 +22,7 @@ stages {
     }
 
 
-    stage ('Installation de mediawiki_creation_FS') {
+    stage ('Création des FS') {
         environment {
           ANSIBLE_FORCE_COLOR = true
         }
@@ -54,7 +54,7 @@ stages {
           }
         }
 
-      stage ('Préparation de l_installation') {
+      stage ("Préparation de l'installation") {
           environment {
             ANSIBLE_FORCE_COLOR = true
           }
