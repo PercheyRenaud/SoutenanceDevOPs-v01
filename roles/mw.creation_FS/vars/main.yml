@@ -1,10 +1,10 @@
 ---
 # vars file for wp.creation_FS
-- livr_dir: /appli/mediawiki/LIVR/28-05
-- project_dir: /appli/projects/MWC/mediawiki
-- package_path: /home/jenkins/INPUT.zip
-- data_disk: /dev/sdb
-- log_disk: /dev/sdc
-- mysql_data_dir: /var/lib/mysql
-- mysql_data_dir_mounted: false
-- import_image: false
+livr_dir: /appli/mediawiki/LIVR/28-05
+project_dir: /appli/projects/MWC/mediawiki
+package_path: /home/jenkins/INPUT.zip
+data_disk: /dev/sdb
+log_disk: /dev/sdc
+mysql_data_dir: /var/lib/mysql
+mysql_data_dir_mounted: false
+import_image: false
