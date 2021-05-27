@@ -54,7 +54,7 @@ stages {
           }
         }
 
-      stage ('Préparation de l'installation') {
+      stage ('Préparation de l_installation') {
           environment {
             ANSIBLE_FORCE_COLOR = true
           }
