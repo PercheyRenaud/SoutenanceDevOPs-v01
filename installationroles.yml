@@ -3,15 +3,21 @@
   - hosts: mediawiki
     become: true
     roles:
-      - role: wk.creation_FS
+      - role: mw.creation_FS
+        tags: [creation_FS]
       #- role: mw.install_maria_DB
-      - role: mk.firewalld
+      - role: mw.firewalld
         tags: [firewalld]
-      - role: mk.prerequis
-      - role: mk.deversement
-      - role: mk.mysqlBD
-      - role: mk.installmediawiki
-      - role: mk.config_apache2
+      - role: mw.prerequis
+        tags: [dependencies]
+      - role: mw.deversement
+        tags: [deversement]
+      - role: mw.mysqlBD
+        tags: [config_wikiDB]
+      - role: mw.installmediawiki
+        tags: [install_mediawiki]
+      - role: mw.config_apache2
+        tags: [config_apache2]
       # - role: wp.import_donnees.xml
 
 
