@@ -1,0 +1,28 @@
+---
+# tasks file for wp.prerequis
+#unzip
+- name: install unzip package
+  package:
+    name: unzip
+    state: present
+  tags: prerequis
+
+
+- name: install php7.3
+  package:
+    name:
+      - php
+      - php-mysql
+      - php-xml
+      - php-mbstring
+      - python3-mysqldb
+    state: present
+  tags: prerequis
+
+- name: install apache2
+  package:
+    name:
+      - apache2
+      - libapache2-mod-php
+    state: present
+  tags: prerequis

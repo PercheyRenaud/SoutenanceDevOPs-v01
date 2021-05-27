@@ -1,0 +1,46 @@
+---
+
+  - hosts: mediawiki
+    become: true
+    roles:
+      - role: mw.creation_FS
+        tags: [creation_FS]
+      - role: mw.firewalld
+        tags: [firewalld]
+      - role: mw.prerequis
+        tags: [dependencies]
+      - role: mw.deversement
+        tags: [deversement]
+      - role: mw.mysqlBD
+        tags: [config_wikiDB]
+      - role: mw.installmediawiki
+        tags: [install_mediawiki]
+      - role: mw.config_apache2
+        tags: [config_apache2]
+      # - role: wp.import_donnees.xml
+
+
+      # - role:
+    vars:
+      - livr_dir: /appli/mediawiki/LIVR/28-05
+      - project_dir: /appli/projects/MWC/mediawiki
+      - package_path: /home/jenkins/INPUT.zip
+      - data_disk: /dev/sdb
+      - log_disk: /dev/sdc
+      - mysql_data_dir: /var/lib/mysql
+      - mysql_data_dir_mounted: false
+      - import_image: false
+      - mdp_bdd: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36633039326332613937343134643161633161623266643035333733313434626664363531343964
+          6439376264646631363636613164306533303038316336340a656536316163626434613534393239
+          66303639333539353938393361663736363431666666343835323631393931626132363863383733
+          6164366131613739650a613361376261373238376530323263313730653739383166633933356461
+          6164
+      - mdp_connexion_wm: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          66386638636632346237613936616662373665356365343539633035623936393631643635306636
+          6135653236373531313966373765353332313162333661660a616433633635383639653535373431
+          36353039653166363339623462653636643434356131303163613730373031653236353437636565
+          3936633832303964610a356134643430666463396136333136613936393864636532633737623734
+          6337

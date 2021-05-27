@@ -1,0 +1,31 @@
+---
+# tasks file for wp.config_apache2
+#Config apache2
+
+- name: setting apache root dir to {{ project_dir }}
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default.conf
+    regexp: DocumentRoot
+    line: " DocumentRoot {{ project_dir }}"
+  tags: apache2
+
+- name: adding directory to apache2.conf
+  blockinfile:
+    path: /etc/apache2/apache2.conf
+    block: |
+      <Directory /appli/projects/MWC/mediawiki>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+        Allow from all
+      </Directory>
+  notify: restart apache2
+  tags: apache2
+
+  #notify: restart apache2
+
+# - name: restart apache2
+#   service:
+#     name: apache2
+#     state: restarted
+#   tags: apache2

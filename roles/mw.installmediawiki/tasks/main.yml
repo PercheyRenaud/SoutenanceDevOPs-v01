@@ -1,0 +1,77 @@
+---
+# tasks file for wp.installmediawiki
+#idemptotence check localSetting.php
+- name: checking for pre-existing LocalSettings
+  command: cat "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+  register: skip_install
+  ignore_errors: true
+  changed_when: false
+  tags: mediawiki
+
+###### PHP.install
+
+- name: Installing mediawiki
+  command: "php /appli/projects/MWC/mediawiki/MWC_01.00.00_install/maintenance/install.php --dbuser=WIKI_DB_USER --dbpass=WIKI_DB_PASSWD --dbname=WIKI_DB --dbserver=localhost --dbtype=mysql --scriptpath=/MWC_01.00.00_install --confpath={{ project_dir }}/MWC_01.00.00_install  --server='http://192.168.56.110' --lang=fr --pass='{{ mdp_connexion_wm }}' superwiki admin"
+  when: skip_install.rc > 0
+  tags: mediawiki
+
+####data###
+
+  ###recupération des donnees.xml
+
+- name: Import donnnees.xml
+  command:
+    cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importDump.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} /appli/mediawiki/LIVR/28-05/INPUT/PACKAGE/Donnees.xml"
+    #when: skip_donnees.rc > 0
+  tags: importdata
+
+- name : rebuildrecentchanges.php
+  command: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+  tags: mediawiki
+
+
+##########"recupération image"
+
+- name: Extract dump_image.tar.gz > DevOps.png
+  unarchive:
+    src: "{{ livr_dir }}/INPUT/PACKAGE/dump_image.tar.gz"
+    dest: "{{ livr_dir }}/INPUT/PACKAGE/"
+    mode: 0755
+    owner: wmcuser
+    remote_src: yes
+    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+  tags: mediawiki
+
+
+- name : importImages.php
+  command:
+    cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/importImages.php --dbuser=WIKI_DB_USER --dbpass={{ mdp_bdd }} {{ livr_dir }}/INPUT/PACKAGE/images/"
+    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+  tags: importdata
+
+- name : rebuildrecentchanges.php
+  command:
+    cmd: "php {{ project_dir }}/MWC_01.00.00_install/maintenance/rebuildrecentchanges.php"
+    creates: "{{ project_dir }}/MWC_01.00.00_install/images/2/21/DevOps.png"
+  tags: mediawiki
+
+
+  #################LoGo
+
+- name: Extract LoGo.tar.gz > GRC-135.png
+  unarchive:
+    src: "{{ livr_dir }}/INPUT/PACKAGE/LoGo.tar.gz"
+    dest: "{{ project_dir }}/MWC_01.00.00_install/resources/assets"
+    mode: 0755
+    owner: wmcuser
+    remote_src: yes
+    creates: "{{ project_dir }}/MWC_01.00.00_install/ressources/assets/LoGo/GRC-135.png"
+      # when: skip_unpack_image.rc > 0
+  tags: mediawiki
+
+- name: config setting.conf pour LOGO
+  lineinfile:
+    path: "{{ project_dir }}/MWC_01.00.00_install/LocalSettings.php"
+    regexp: '1x'
+    line: "$wgLogos = [ '1x' => \"$wgResourceBasePath/resources/assets/LoGo/GRC-135.png\" ];"
+  tags: mediawiki

@@ -1,0 +1,16 @@
+---
+# tasks file for wp.firewalld
+- name: firewalld
+  package:
+    name: firewalld
+    state: present
+#  tags: firewalld
+
+
+- name: permit traffic on port 80
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+#  tags: firewalld
+  notify: restart firewalld
