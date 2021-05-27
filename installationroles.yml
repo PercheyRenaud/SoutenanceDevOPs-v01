@@ -5,7 +5,6 @@
     roles:
       - role: mw.creation_FS
         tags: [creation_FS]
-      #- role: mw.install_maria_DB
       - role: mw.firewalld
         tags: [firewalld]
       - role: mw.prerequis
