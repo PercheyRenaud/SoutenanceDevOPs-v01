@@ -34,7 +34,7 @@ stages {
             tags: 'creation_FS',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}',
-            extraVars: pipelining=True
+            extraVars: [ pipelining: "True" ]
           )
         }
       }
@@ -51,7 +51,7 @@ stages {
               tags: 'dependencies',
               inventory: 'inventories/hosts',
               extras: '${VERBOSE}',
-              extraVars: pipelining=True
+              extraVars: [ pipelining: "True" ]
             )
           }
         }
@@ -68,7 +68,7 @@ stages {
               tags: 'pre-install',
               inventory: 'inventories/hosts',
               extras: '${VERBOSE}',
-              extraVars: pipelining=True
+              extraVars: [ pipelining: "True" ]
             )
           }
         }
@@ -85,7 +85,7 @@ stages {
             tags: 'install_mediawiki',
             inventory: 'inventories/hosts',
             extras: '${VERBOSE}',
-            extraVars: pipelining=True
+            extraVars: [ pipelining: "True" ]
           )
         }
       }
