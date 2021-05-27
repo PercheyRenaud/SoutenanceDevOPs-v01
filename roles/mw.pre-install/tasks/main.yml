@@ -46,7 +46,6 @@
   mysql_db:
     name: WIKI_DB
     state: present
-  tags: prerequis
 
 - name: create mediawiki mysql User
   mysql_user:
@@ -54,4 +53,3 @@
     host: localhost
     password: "{{ mdp_bdd }}"
     priv: WIKI_DB.*:ALL
-  tags: prerequis

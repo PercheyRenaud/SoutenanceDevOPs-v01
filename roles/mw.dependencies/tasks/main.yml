@@ -23,3 +23,17 @@
       - apache2
       - libapache2-mod-php
     state: present
+
+- name: firewalld
+  package:
+    name: firewalld
+    state: present
+
+
+- name: permit traffic on port 80
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+#  notify: restart firewalld
