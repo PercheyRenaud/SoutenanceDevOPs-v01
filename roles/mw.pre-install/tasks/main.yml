@@ -33,7 +33,7 @@
     mode: 0755
     owner: wmcuser
     remote_src: yes
-    creates: "{{ project_dir }}/wikidevops"
+    creates: "{{ project_dir }}/MWC_01.00.00_install"
 #  when: skip_unpack.rc > 0
 
 - name: renaming
