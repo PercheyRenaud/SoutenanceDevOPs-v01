@@ -4,7 +4,7 @@
   package:
     name: firewalld
     state: present
-  tags: firewalld
+#  tags: firewalld
 
 
 - name: permit traffic on port 80
@@ -12,5 +12,5 @@
     port: 80/tcp
     permanent: yes
     state: enabled
-  tags: firewalld
+#  tags: firewalld
   notify: restart firewalld

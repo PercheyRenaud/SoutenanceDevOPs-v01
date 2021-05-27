@@ -6,6 +6,7 @@
       - role: wp.creation_FS
       #- role: wp.install_maria_DB
       - role: wp.firewalld
+        tags: [firewalld]
       - role: wp.prerequis
       - role: wp.deversement
       - role: wp.mysqlBD
