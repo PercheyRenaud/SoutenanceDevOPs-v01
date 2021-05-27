@@ -11,7 +11,7 @@
       - role: wp.mysqlBD
       - role: wp.installmediawiki
       - role: wp.config_apache2
-      - role: wp.import_donnees.xml
+      # - role: wp.import_donnees.xml
 
 
       # - role:
