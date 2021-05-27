@@ -12,19 +12,8 @@
       - role: mw.installmediawiki
         tags: [install_mediawiki]
 
-      # - role: wp.import_donnees.xml
-
-
-      # - role:
     vars:
-      # - livr_dir: /appli/mediawiki/LIVR/28-05
-      # - project_dir: /appli/projects/MWC/mediawiki
-      # - package_path: /home/jenkins/INPUT.zip
-      # - data_disk: /dev/sdb
-      # - log_disk: /dev/sdc
-      # - mysql_data_dir: /var/lib/mysql
-      # - mysql_data_dir_mounted: false
-      # - import_image: false
+
       - mdp_bdd: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36633039326332613937343134643161633161623266643035333733313434626664363531343964

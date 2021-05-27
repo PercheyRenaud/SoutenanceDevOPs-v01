@@ -18,7 +18,7 @@
 
 ####data###
 
-  ###recupération des donnees.xml
+  ###recupération de donnees.xml
 
 - name: Import donnnees.xml
   command:
@@ -90,7 +90,7 @@
       </Directory>
   notify: restart apache2
 
-  #notify: restart apache2
+
 
 # - name: restart apache2
 #   service:

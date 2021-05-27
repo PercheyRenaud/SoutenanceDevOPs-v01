@@ -1,2 +1,5 @@
 ---
 # vars file for wp.installmediawiki
+livr_dir: /appli/mediawiki/LIVR/28-05
+project_dir: /appli/projects/MWC/mediawiki
+package_path: INPUT.zip
