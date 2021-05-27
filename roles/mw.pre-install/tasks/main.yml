@@ -39,7 +39,7 @@
 - name: renaming
   command:
     cmd: mv "{{ project_dir }}/wikidevops" "{{ project_dir }}/MWC_01.00.00_install"
-    creates: "{{ project_dir }}/wikidevops"
+    creates: "{{ project_dir }}/MWC_01.00.00_install"
 #  when: skip_unpack.rc > 0
 
 - name: create mediawiki mysql database
