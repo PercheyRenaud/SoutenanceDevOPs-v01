@@ -33,7 +33,8 @@ stages {
             playbook: 'installationroles.yml',
             tags: 'creation_FS',
             inventory: 'inventories/hosts',
-            extras: '${VERBOSE}'
+            extras: '${VERBOSE}',
+            extraVars: pipelining=True
           )
         }
       }
@@ -49,7 +50,8 @@ stages {
               playbook: 'installationroles.yml',
               tags: 'dependencies',
               inventory: 'inventories/hosts',
-              extras: '${VERBOSE}'
+              extras: '${VERBOSE}',
+              extraVars: pipelining=True
             )
           }
         }
@@ -65,7 +67,8 @@ stages {
               playbook: 'installationroles.yml',
               tags: 'pre-install',
               inventory: 'inventories/hosts',
-              extras: '${VERBOSE}'
+              extras: '${VERBOSE}',
+              extraVars: pipelining=True
             )
           }
         }
@@ -81,7 +84,8 @@ stages {
             playbook: 'installationroles.yml',
             tags: 'install_mediawiki',
             inventory: 'inventories/hosts',
-            extras: '${VERBOSE}'
+            extras: '${VERBOSE}',
+            extraVars: pipelining=True
           )
         }
       }
